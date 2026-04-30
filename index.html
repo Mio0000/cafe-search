@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>営業リスト</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .filter-btn.active { background:#1d4ed8; color:#fff; border-color:#1d4ed8; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <!-- ヘッダー -->
+  <div class="bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-4 py-6 shadow">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-2xl font-bold tracking-tight">🎯 営業リスト</h1>
+      <p class="text-blue-200 text-sm mt-1">サイトなし店舗 ／ 生成日: 2026-04-30 16:29</p>
+      <div class="mt-3 flex flex-wrap gap-3 text-sm">
+        <span class="bg-white/20 rounded-full px-3 py-1">全 <strong>9</strong> 件</span>
+        <span class="bg-white/20 rounded-full px-3 py-1">表示中 <strong id="visibleCount">9</strong> 件</span>
+        <button onclick="restoreAll()"
+          class="bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition text-xs">
+          🔄 削除済みを復元
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- フィルター -->
+  <div class="max-w-5xl mx-auto px-4 pt-4 space-y-2">
+    <!-- エリア -->
+    <div class="flex flex-wrap gap-2 items-center">
+      <span class="text-xs text-gray-400 font-semibold w-10">エリア</span>
+      <button onclick="setLocation('all')" data-val="all"
+        class="filter-btn loc-btn active px-3 py-1.5 rounded-full text-sm font-medium border transition">
+        すべて
+      </button>
+      <button onclick="setLocation('Melbourne')" data-val="Melbourne" class="filter-btn loc-btn px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition">Melbourne</button>
+<button onclick="setLocation('広島')" data-val="広島" class="filter-btn loc-btn px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition">広島</button>
+    </div>
+    <!-- 業種 -->
+    <div class="flex flex-wrap gap-2 items-center pb-2">
+      <span class="text-xs text-gray-400 font-semibold w-10">業種</span>
+      <button onclick="setCategory('all')" data-val="all"
+        class="filter-btn cat-btn active px-3 py-1.5 rounded-full text-sm font-medium border transition">
+        すべて
+      </button>
+      <button onclick="setCategory('Cafe')" data-val="Cafe" class="filter-btn cat-btn px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition">Cafe</button>
+<button onclick="setCategory('Music School')" data-val="Music School" class="filter-btn cat-btn px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition">Music School</button>
+<button onclick="setCategory('Pet Grooming')" data-val="Pet Grooming" class="filter-btn cat-btn px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition">Pet Grooming</button>
+<button onclick="setCategory('動物病院')" data-val="動物病院" class="filter-btn cat-btn px-3 py-1.5 rounded-full text-sm font-medium border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition">動物病院</button>
+    </div>
+  </div>
+
+  <!-- カードグリッド -->
+  <div id="cardGrid"
+    class="max-w-5xl mx-auto px-4 py-4 pb-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  </div>
+
+  <script>
+  const PLACES = [{"id": "ChIJ_W0hPrxD1moRP5wou4PSfko", "name": "Cathedral Coffee", "location": "Melbourne", "category": "Cafe", "rating": 4.2, "reviewCount": 438, "address": "37 Swanston St, Melbourne VIC 3000, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Cathedral%20Coffee", "mailUrl": "mailto:?subject=Cathedral%20Coffee%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20Cathedral%20Coffee%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJqe5RObRC1moR8XdnjeOXV8Q", "name": "Cafe Issus", "location": "Melbourne", "category": "Cafe", "rating": 4.3, "reviewCount": 618, "address": "8 Centre Pl, Melbourne VIC 3000, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Cafe%20Issus", "mailUrl": "mailto:?subject=Cafe%20Issus%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20Cafe%20Issus%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJhUSeY8tC1moR6It_ZFpA1uE", "name": "The Vine Coffee Roasters", "location": "Melbourne", "category": "Cafe", "rating": 3.4, "reviewCount": 73, "address": "445 Swanston St, Melbourne VIC 3000, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=The%20Vine%20Coffee%20Roasters", "mailUrl": "mailto:?subject=The%20Vine%20Coffee%20Roasters%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20The%20Vine%20Coffee%20Roasters%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJtcavRktd1moRRnaflFfrKhs", "name": "Café Felice", "location": "Melbourne", "category": "Cafe", "rating": 4.6, "reviewCount": 52, "address": "461 Bourke St, Melbourne VIC 3000, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Caf%C3%A9%20Felice", "mailUrl": "mailto:?subject=Caf%C3%A9%20Felice%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20Caf%C3%A9%20Felice%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJ33UY1LVC1moRQdzmULIlbtk", "name": "Three Drops Coffee & Sandwich", "location": "Melbourne", "category": "Cafe", "rating": 4.9, "reviewCount": 536, "address": "The Capitol Arcade (behind Starbucks, SHOP 3/115 Swanston St, Melbourne VIC 3000, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Three%20Drops%20Coffee%20%26%20Sandwich", "mailUrl": "mailto:?subject=Three%20Drops%20Coffee%20%26%20Sandwich%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20Three%20Drops%20Coffee%20%26%20Sandwich%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJA2cnLUxd1moRNxErvRe4YgM", "name": "Australian Institute of Music", "location": "Melbourne", "category": "Music School", "rating": 4, "reviewCount": 26, "address": "120 King St, Melbourne VIC 3000, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Australian%20Institute%20of%20Music", "mailUrl": "mailto:?subject=Australian%20Institute%20of%20Music%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20Australian%20Institute%20of%20Music%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJPU5qYEVD1moRiuT55vLbZ-4", "name": "Prince Hairy Pet Grooming", "location": "Melbourne", "category": "Pet Grooming", "rating": 5, "reviewCount": 25, "address": "777 Nicholson St, Carlton North VIC 3054, Australia", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Prince%20Hairy%20Pet%20Grooming", "mailUrl": "mailto:?subject=Prince%20Hairy%20Pet%20Grooming%20/%20Website%20Design%20Proposal&body=Hi%2C%0A%0AI%20came%20across%20Prince%20Hairy%20Pet%20Grooming%20and%20noticed%20your%20business%20doesn%27t%20currently%20have%20a%20website.%0A%0AI%27d%20love%20to%20help%20you%20build%20a%20professional%20website%20to%3A%0A%20%20%E2%80%A2%20Attract%20more%20customers%20via%20Google%20Search%0A%20%20%E2%80%A2%20Mobile-friendly%20design%0A%20%20%E2%80%A2%20Google%20Maps%20integration%0A%0AWould%20you%20be%20open%20to%20a%20quick%20chat%3F%0A%0ABest%20regards%2C"}, {"id": "ChIJD-WRMz6iWjURQMR9EKzAuRc", "name": "Kimuraaiken Clinic", "location": "広島", "category": "動物病院", "rating": 4.4, "reviewCount": 54, "address": "Japan, 〒730-0052 Hiroshima, Naka Ward, Sendamachi, 2-chōme−9−２３ 藤本ビル", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Kimuraaiken%20Clinic", "mailUrl": "mailto:?subject=Kimuraaiken%20Clinic%E6%A7%98%20%EF%BC%8F%20%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%AE%E3%81%94%E6%8F%90%E6%A1%88&body=%E3%81%AF%E3%81%98%E3%82%81%E3%81%BE%E3%81%97%E3%81%A6%E3%80%82%0A%0AKimuraaiken%20Clinic%E6%A7%98%E3%81%AE%E3%81%8A%E5%BA%97%E3%82%92%E6%8B%9D%E8%A6%8B%E3%81%97%E3%80%81%E3%81%94%E9%80%A3%E7%B5%A1%E3%81%84%E3%81%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%0A%0A%E7%8F%BE%E5%9C%A8%E3%80%81%E8%B2%B4%E5%BA%97%E3%81%AE%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%8C%E8%A6%8B%E5%BD%93%E3%81%9F%E3%82%89%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%9F%E3%82%81%E3%80%81%0A%E9%9B%86%E5%AE%A2%E5%BC%B7%E5%8C%96%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEWeb%E3%82%B5%E3%82%A4%E3%83%88%E5%88%B6%E4%BD%9C%E3%82%92%E3%81%94%E6%8F%90%E6%A1%88%E3%81%A7%E3%81%8D%E3%82%8C%E3%81%B0%E3%81%A8%E6%80%9D%E3%81%84%E3%81%94%E9%80%A3%E7%B5%A1%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%0A%0A%E3%83%BB%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%B3%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%0A%E3%83%BBGoogle%E3%83%9E%E3%83%83%E3%83%97%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA%0A%E3%83%BBSEO%E5%AF%BE%E7%AD%96%0A%0A%E3%81%94%E8%88%88%E5%91%B3%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%E3%82%89%E3%80%81%E3%81%9C%E3%81%B2%E4%B8%80%E5%BA%A6%E3%81%8A%E8%A9%B1%E3%81%97%E3%81%95%E3%81%9B%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82%0A%0A%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%E3%81%8A%E9%A1%98%E3%81%84%E3%81%84%E3%81%9F%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"}, {"id": "ChIJtcFF8kGiWjUR63CKCBJp0Hk", "name": "Matsumoto Animal Clinic", "location": "広島", "category": "動物病院", "rating": 2.8, "reviewCount": 31, "address": "3-3 Sumiyoshichō, Naka Ward, Hiroshima, 730-0813, Japan", "instagramUrl": "https://www.instagram.com/explore/search/keyword/?q=Matsumoto%20Animal%20Clinic", "mailUrl": "mailto:?subject=Matsumoto%20Animal%20Clinic%E6%A7%98%20%EF%BC%8F%20%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%B6%E4%BD%9C%E3%81%AE%E3%81%94%E6%8F%90%E6%A1%88&body=%E3%81%AF%E3%81%98%E3%82%81%E3%81%BE%E3%81%97%E3%81%A6%E3%80%82%0A%0AMatsumoto%20Animal%20Clinic%E6%A7%98%E3%81%AE%E3%81%8A%E5%BA%97%E3%82%92%E6%8B%9D%E8%A6%8B%E3%81%97%E3%80%81%E3%81%94%E9%80%A3%E7%B5%A1%E3%81%84%E3%81%9F%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%0A%0A%E7%8F%BE%E5%9C%A8%E3%80%81%E8%B2%B4%E5%BA%97%E3%81%AE%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%8C%E8%A6%8B%E5%BD%93%E3%81%9F%E3%82%89%E3%81%AA%E3%81%8B%E3%81%A3%E3%81%9F%E3%81%9F%E3%82%81%E3%80%81%0A%E9%9B%86%E5%AE%A2%E5%BC%B7%E5%8C%96%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AEWeb%E3%82%B5%E3%82%A4%E3%83%88%E5%88%B6%E4%BD%9C%E3%82%92%E3%81%94%E6%8F%90%E6%A1%88%E3%81%A7%E3%81%8D%E3%82%8C%E3%81%B0%E3%81%A8%E6%80%9D%E3%81%84%E3%81%94%E9%80%A3%E7%B5%A1%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%0A%0A%E3%83%BB%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%B3%E5%AF%BE%E5%BF%9C%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%0A%E3%83%BBGoogle%E3%83%9E%E3%83%83%E3%83%97%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA%0A%E3%83%BBSEO%E5%AF%BE%E7%AD%96%0A%0A%E3%81%94%E8%88%88%E5%91%B3%E3%81%8C%E3%81%94%E3%81%96%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%E3%82%89%E3%80%81%E3%81%9C%E3%81%B2%E4%B8%80%E5%BA%A6%E3%81%8A%E8%A9%B1%E3%81%97%E3%81%95%E3%81%9B%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82%0A%0A%E3%82%88%E3%82%8D%E3%81%97%E3%81%8F%E3%81%8A%E9%A1%98%E3%81%84%E3%81%84%E3%81%9F%E3%81%97%E3%81%BE%E3%81%99%E3%80%82"}];
+  const DELETED_KEY = "sales_list_deleted_v2";
+  let currentLocation = "all";
+  let currentCategory = "all";
+
+  const CAT_COLORS = {"カフェ": "bg-amber-100 text-amber-800", "歯科医院": "bg-blue-100 text-blue-800", "接骨院・整体": "bg-green-100 text-green-800", "ピアノ教室": "bg-purple-100 text-purple-800", "工務店": "bg-orange-100 text-orange-800", "ペットサロン": "bg-pink-100 text-pink-800", "動物病院": "bg-teal-100 text-teal-800", "Cafe": "bg-amber-100 text-amber-800", "Dentist": "bg-blue-100 text-blue-800", "Chiropractor": "bg-green-100 text-green-800", "Music School": "bg-purple-100 text-purple-800", "Builder": "bg-orange-100 text-orange-800", "Pet Grooming": "bg-pink-100 text-pink-800", "Vet": "bg-teal-100 text-teal-800"};
+  const LOC_COLORS = {"Melbourne": "bg-sky-100 text-sky-800", "広島": "bg-rose-100 text-rose-800"};
+
+  function getDeleted() { return new Set(JSON.parse(localStorage.getItem(DELETED_KEY) || "[]")); }
+  function saveDeleted(s) { localStorage.setItem(DELETED_KEY, JSON.stringify([...s])); }
+
+  function renderCard(p) {
+    const catColor = CAT_COLORS[p.category] || "bg-gray-100 text-gray-700";
+    const locColor = LOC_COLORS[p.location]  || "bg-slate-100 text-slate-700";
+    const stars = p.rating
+      ? `<span class="text-yellow-400">${"★".repeat(Math.round(p.rating))}</span>
+         <span class="font-semibold text-gray-700 ml-1">${p.rating}</span>`
+      : `<span class="text-gray-400 text-xs">No rating</span>`;
+    const reviews = p.reviewCount ? `<span class="text-gray-400 text-xs ml-2">(${p.reviewCount})</span>` : "";
+
+    return `
+      <div id="card-${p.id}" data-loc="${p.location}" data-cat="${p.category}"
+        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-2">
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${locColor}">${p.location}</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${catColor}">${p.category}</span>
+          </div>
+          <button onclick="deleteCard('${p.id}')"
+            class="text-gray-300 hover:text-red-400 text-xl leading-none font-bold shrink-0"
+            title="削除">×</button>
+        </div>
+
+        <div>
+          <h2 class="text-base font-bold text-gray-900 leading-snug">${p.name}</h2>
+          <div class="flex items-center mt-1">${stars}${reviews}</div>
+        </div>
+
+        <p class="text-gray-500 text-xs leading-relaxed">📍 ${p.address || "—"}</p>
+
+        <div class="flex gap-2 pt-1 mt-auto">
+          <a href="${p.instagramUrl}" target="_blank"
+            class="flex-1 text-center text-sm font-medium bg-gradient-to-r from-pink-500 to-purple-500
+                   text-white rounded-xl py-2 hover:opacity-90 transition">
+            📸 Instagram
+          </a>
+          <a href="${p.mailUrl}"
+            class="flex-1 text-center text-sm font-medium bg-blue-600 text-white
+                   rounded-xl py-2 hover:bg-blue-700 transition">
+            ✉ Mail
+          </a>
+        </div>
+      </div>`;
+  }
+
+  function render() {
+    const deleted = getDeleted();
+    const grid = document.getElementById("cardGrid");
+    grid.innerHTML = "";
+    let visible = 0;
+    PLACES.forEach(p => {
+      if (deleted.has(p.id)) return;
+      if (currentLocation !== "all" && p.location !== currentLocation) return;
+      if (currentCategory !== "all" && p.category !== currentCategory) return;
+      grid.insertAdjacentHTML("beforeend", renderCard(p));
+      visible++;
+    });
+    document.getElementById("visibleCount").textContent = visible;
+    if (visible === 0) {
+      grid.innerHTML = `<div class="col-span-3 text-center py-20 text-gray-400 text-sm">該当する店舗がありません</div>`;
+    }
+  }
+
+  function deleteCard(id) {
+    const d = getDeleted(); d.add(id); saveDeleted(d); render();
+  }
+  function restoreAll() { localStorage.removeItem(DELETED_KEY); render(); }
+
+  function setLocation(val) {
+    currentLocation = val;
+    document.querySelectorAll(".loc-btn").forEach(b => b.classList.toggle("active", b.dataset.val === val));
+    render();
+  }
+  function setCategory(val) {
+    currentCategory = val;
+    document.querySelectorAll(".cat-btn").forEach(b => b.classList.toggle("active", b.dataset.val === val));
+    render();
+  }
+
+  render();
+  </script>
+</body>
+</html>
