@@ -13,11 +13,15 @@ Google Places API (New) で複数エリア×複数業種を検索し、
 
 import json
 import os
+import re
 import time
+import unicodedata
 import urllib.parse
 from datetime import datetime
 
 import requests
+
+PLACES_DB_FILE = "places_db.json"
 
 # ═══════════════════════════════════════════════════════
 #  API キー
@@ -25,7 +29,8 @@ import requests
 PLACES_API_KEY = os.environ.get("PLACES_API_KEY", "AIzaSyCbbtEs5nch9n8LT663LC04ISju4duBgNc")
 
 MIN_REVIEW_COUNT = 20
-OUTPUT_FILE = "index.html"
+OUTPUT_FILE      = "index.html"
+DEMO_BASE_URL    = "https://cafe-model.vercel.app"
 
 # ═══════════════════════════════════════════════════════
 #  業種リスト（英語エリア用）
@@ -61,14 +66,14 @@ SEARCH_LOCATIONS = [
         "name":           "Melbourne",
         "latitude":       -37.8136,
         "longitude":      144.9631,
-        "radius_m":       10000,
+        "radius_m":       50000,
         "business_types": BUSINESS_TYPES_EN,
     },
     {
         "name":           "広島",
         "latitude":       34.3853,
         "longitude":      132.4553,
-        "radius_m":       1500,
+        "radius_m":       50000,
         "business_types": BUSINESS_TYPES_JA,
     },
 ]
@@ -102,11 +107,13 @@ def _headers() -> dict:
 def _center(loc: dict) -> dict:
     return {"latitude": loc["latitude"], "longitude": loc["longitude"]}
 
+MAX_PAGES = 3
+
 def _search_text(loc: dict, text_query: str, page_token=None) -> dict:
     headers = {
         "Content-Type": "application/json",
         "X-Goog-Api-Key": PLACES_API_KEY,
-        "X-Goog-FieldMask": "places.id,places.displayName,places.rating,places.userRatingCount,places.formattedAddress,places.websiteUri",
+        "X-Goog-FieldMask": FIELD_MASK,
     }
     payload = {
         "textQuery": text_query,
@@ -124,10 +131,11 @@ def _search_text(loc: dict, text_query: str, page_token=None) -> dict:
     return resp.json()
 
 def fetch_all(loc: dict, biz: dict) -> list:
-    all_places, next_token = [], None
-    while True:
+    all_places, next_token, page = [], None, 0
+    while page < MAX_PAGES:
         data = _search_text(loc, biz["text_query"], next_token)
         all_places.extend(data.get("places", []))
+        page += 1
         next_token = data.get("nextPageToken")
         if not next_token:
             break
@@ -141,6 +149,43 @@ def filter_places(places: list) -> list:
     ]
 
 
+def load_db() -> list[dict]:
+    if os.path.exists(PLACES_DB_FILE):
+        with open(PLACES_DB_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+def save_db(records: list[dict]) -> None:
+    with open(PLACES_DB_FILE, "w", encoding="utf-8") as f:
+        json.dump(records, f, ensure_ascii=False, indent=2)
+
+def record_from_place(p: dict, loc_name: str, label: str, is_ja: bool) -> dict:
+    name = p.get("displayName", {}).get("text", "")
+    return {
+        "id":           p.get("id", ""),
+        "name":         name,
+        "location":     loc_name,
+        "category":     label,
+        "rating":       p.get("rating", ""),
+        "reviewCount":  p.get("userRatingCount", ""),
+        "address":      p.get("formattedAddress", ""),
+        "instagramUrl": instagram_url(name),
+        "mailUrl":      mail_url_ja(name) if is_ja else mail_url(name),
+    }
+
+
+# ═══════════════════════════════════════════════════════
+#  スラッグ生成
+# ═══════════════════════════════════════════════════════
+def slugify(name: str) -> str:
+    """カフェ名 → URL スラッグ (例: "Café Felice" → "cafe-felice")"""
+    name = unicodedata.normalize("NFKD", name)
+    name = "".join(c for c in name if not unicodedata.combining(c))
+    name = name.lower()
+    name = re.sub(r"[^a-z0-9]+", "-", name)
+    return name.strip("-")
+
+
 # ═══════════════════════════════════════════════════════
 #  URL 生成
 # ═══════════════════════════════════════════════════════
@@ -148,10 +193,12 @@ def instagram_url(name: str) -> str:
     return f"https://www.instagram.com/explore/search/keyword/?q={urllib.parse.quote(name)}"
 
 def mail_url(name: str) -> str:
+    demo = f"{DEMO_BASE_URL}/{slugify(name)}"
     subject = urllib.parse.quote(f"{name} / Website Design Proposal")
     body = urllib.parse.quote(
-        f"Hi,\n\nI came across {name} and noticed your business doesn't currently have a website.\n\n"
-        "I'd love to help you build a professional website to:\n"
+        f"Hi,\n\nI built a free demo website for {name}:\n{demo}\n\n"
+        f"I noticed your business doesn't currently have a website. "
+        "I'd love to help you build a professional site to:\n"
         "  • Attract more customers via Google Search\n"
         "  • Mobile-friendly design\n"
         "  • Google Maps integration\n\n"
@@ -160,9 +207,11 @@ def mail_url(name: str) -> str:
     return f"mailto:?subject={subject}&body={body}"
 
 def mail_url_ja(name: str) -> str:
+    demo = f"{DEMO_BASE_URL}/{slugify(name)}"
     subject = urllib.parse.quote(f"{name}様 ／ ホームページ制作のご提案")
     body = urllib.parse.quote(
         f"はじめまして。\n\n{name}様のお店を拝見し、ご連絡いたしました。\n\n"
+        f"貴店をイメージしたデモサイトをご用意しました：\n{demo}\n\n"
         "現在、貴店のホームページが見当たらなかったため、\n"
         "集客強化のためのWebサイト制作をご提案できればと思いご連絡しました。\n\n"
         "・スマートフォン対応のデザイン\n"
@@ -201,33 +250,14 @@ LOCATION_COLORS = {
     "広島":      "bg-rose-100 text-rose-800",
 }
 
-def build_places_json(all_results: list) -> str:
-    records = []
-    for item in all_results:
-        loc_name = item["location"]
-        label    = item["label"]
-        is_ja    = item.get("is_ja", False)
-        for p in item["places"]:
-            name     = p.get("displayName", {}).get("text", "")
-            place_id = p.get("id", "")
-            records.append({
-                "id":           place_id,   # Google Place ID（安定した一意キー）
-                "name":         name,
-                "location":     loc_name,
-                "category":     label,
-                "rating":       p.get("rating", ""),
-                "reviewCount":  p.get("userRatingCount", ""),
-                "address":      p.get("formattedAddress", ""),
-                "instagramUrl": instagram_url(name),
-                "mailUrl":      mail_url_ja(name) if is_ja else mail_url(name),
-            })
+def build_places_json(records: list[dict]) -> str:
     return json.dumps(records, ensure_ascii=False)
 
-def generate_html(all_results: list, generated_at: str) -> str:
-    places_json   = build_places_json(all_results)
-    total         = len(json.loads(places_json))   # 重複除去済みの実件数
-    locations     = list(dict.fromkeys(r["location"] for r in all_results if r["places"]))
-    categories    = list(dict.fromkeys(r["label"]    for r in all_results if r["places"]))
+def generate_html(records: list[dict], generated_at: str) -> str:
+    places_json = build_places_json(records)
+    total       = len(records)
+    locations   = list(dict.fromkeys(r["location"] for r in records))
+    categories  = list(dict.fromkeys(r["category"] for r in records))
 
     def tab_buttons(items, filter_fn, extra_class=""):
         return "\n".join(
@@ -299,16 +329,53 @@ def generate_html(all_results: list, generated_at: str) -> str:
   <script>
   const PLACES = {places_json};
   const DELETED_KEY = "sales_list_deleted_v2";
+  const SENT_KEY    = "sales_list_sent_v1";
+  const DEMO_BASE   = "https://cafe-model.vercel.app";
   let currentLocation = "all";
   let currentCategory = "all";
+
+  function slugify(s) {{
+    return s.toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }}
+
+  function buildMailUrl(p) {{
+    const slug    = slugify(p.name);
+    const demoUrl = `${{DEMO_BASE}}/${{slug}}`;
+    const isJa    = p.location === "広島";
+    if (isJa) {{
+      const subject = encodeURIComponent(`${{p.name}}様 ／ ホームページ制作のご提案`);
+      const body    = encodeURIComponent(
+        `はじめまして。\n\n${{p.name}}様のお店を拝見し、ご連絡いたしました。\n\n` +
+        `貴店をイメージしたデモサイトをご用意しました：\n${{demoUrl}}\n\n` +
+        `現在、貴店のホームページが見当たらなかったため、集客強化のためのWebサイト制作をご提案できればと思いご連絡しました。\n\n` +
+        `・スマートフォン対応のデザイン\n・Googleマップとの連携\n・SEO対策\n\n` +
+        `ご興味がございましたら、ぜひ一度お話しさせてください。\n\nよろしくお願いいたします。`
+      );
+      return `mailto:?subject=${{subject}}&body=${{body}}`;
+    }} else {{
+      const subject = encodeURIComponent(`${{p.name}} / Website Design Proposal`);
+      const body    = encodeURIComponent(
+        `Hi,\n\nI built a free demo website for ${{p.name}}:\n${{demoUrl}}\n\n` +
+        `I noticed your business doesn't have a website yet. I'd love to help you build one to:\n` +
+        `  • Attract more customers via Google Search\n  • Mobile-friendly design\n  • Google Maps integration\n\n` +
+        `Would you be open to a quick chat?\n\nBest regards,`
+      );
+      return `mailto:?subject=${{subject}}&body=${{body}}`;
+    }}
+  }}
 
   const CAT_COLORS = {json.dumps(CATEGORY_COLORS, ensure_ascii=False)};
   const LOC_COLORS = {json.dumps(LOCATION_COLORS, ensure_ascii=False)};
 
   function getDeleted() {{ return new Set(JSON.parse(localStorage.getItem(DELETED_KEY) || "[]")); }}
   function saveDeleted(s) {{ localStorage.setItem(DELETED_KEY, JSON.stringify([...s])); }}
+  function getSent() {{ return new Set(JSON.parse(localStorage.getItem(SENT_KEY) || "[]")); }}
+  function saveSent(s) {{ localStorage.setItem(SENT_KEY, JSON.stringify([...s])); }}
 
-  function renderCard(p) {{
+  function renderCard(p, sent) {{
     const catColor = CAT_COLORS[p.category] || "bg-gray-100 text-gray-700";
     const locColor = LOC_COLORS[p.location]  || "bg-slate-100 text-slate-700";
     const stars = p.rating
@@ -316,10 +383,15 @@ def generate_html(all_results: list, generated_at: str) -> str:
          <span class="font-semibold text-gray-700 ml-1">${{p.rating}}</span>`
       : `<span class="text-gray-400 text-xs">No rating</span>`;
     const reviews = p.reviewCount ? `<span class="text-gray-400 text-xs ml-2">(${{p.reviewCount}})</span>` : "";
+    const isSent = sent.has(p.id);
+    const cardBorder = isSent ? "border-green-300 bg-green-50" : "border-gray-100 bg-white";
+    const sentBtn = isSent
+      ? `<button onclick="toggleSent('${{p.id}}')" class="w-full text-center text-sm font-medium bg-green-500 text-white rounded-xl py-2 hover:bg-green-600 transition">✅ 送信済み</button>`
+      : `<button onclick="toggleSent('${{p.id}}')" class="w-full text-center text-sm font-medium bg-gray-100 text-gray-500 rounded-xl py-2 hover:bg-gray-200 transition">📤 送信済みにする</button>`;
 
     return `
       <div id="card-${{p.id}}" data-loc="${{p.location}}" data-cat="${{p.category}}"
-        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 flex flex-col gap-3">
+        class="rounded-2xl shadow-sm border ${{cardBorder}} p-4 flex flex-col gap-3">
         <div class="flex items-start justify-between gap-2">
           <div class="flex flex-wrap gap-1">
             <span class="text-xs font-semibold px-2 py-0.5 rounded-full ${{locColor}}">${{p.location}}</span>
@@ -343,17 +415,19 @@ def generate_html(all_results: list, generated_at: str) -> str:
                    text-white rounded-xl py-2 hover:opacity-90 transition">
             📸 Instagram
           </a>
-          <a href="${{p.mailUrl}}"
+          <a href="${{buildMailUrl(p)}}"
             class="flex-1 text-center text-sm font-medium bg-blue-600 text-white
                    rounded-xl py-2 hover:bg-blue-700 transition">
-            ✉ Mail
+            ✉ メール送信
           </a>
         </div>
+        <div>${{sentBtn}}</div>
       </div>`;
   }}
 
   function render() {{
     const deleted = getDeleted();
+    const sent = getSent();
     const grid = document.getElementById("cardGrid");
     grid.innerHTML = "";
     let visible = 0;
@@ -361,7 +435,7 @@ def generate_html(all_results: list, generated_at: str) -> str:
       if (deleted.has(p.id)) return;
       if (currentLocation !== "all" && p.location !== currentLocation) return;
       if (currentCategory !== "all" && p.category !== currentCategory) return;
-      grid.insertAdjacentHTML("beforeend", renderCard(p));
+      grid.insertAdjacentHTML("beforeend", renderCard(p, sent));
       visible++;
     }});
     document.getElementById("visibleCount").textContent = visible;
@@ -372,6 +446,17 @@ def generate_html(all_results: list, generated_at: str) -> str:
 
   function deleteCard(id) {{
     const d = getDeleted(); d.add(id); saveDeleted(d); render();
+  }}
+  function toggleSent(id) {{
+    const s = getSent();
+    if (s.has(id)) {{
+      s.delete(id);
+    }} else {{
+      s.add(id);
+      const p = PLACES.find(p => p.id === id);
+      if (p) window.open(buildMailUrl(p), "_blank");
+    }}
+    saveSent(s); render();
   }}
   function restoreAll() {{ localStorage.removeItem(DELETED_KEY); render(); }}
 
@@ -400,9 +485,14 @@ def main():
     print(f"=== 営業リスト生成 ===")
     print(f"エリア数: {len(SEARCH_LOCATIONS)}  予定APIコール数: {total_api_calls}+\n")
 
-    all_results = []
+    # 累積DBをロードし、既存IDと既存の名前+住所ペアを seen に入れておく
+    db        = load_db()
+    seen_ids  = {r["id"] for r in db if r.get("id")}
+    seen_keys = {(r["name"], r["address"]) for r in db}
+    print(f"📂 既存DB: {len(db)} 件 ({PLACES_DB_FILE})\n")
+
     call_count  = 0
-    seen_ids    = set()   # エリア・業種をまたいだ全体重複排除用
+    new_count   = 0
 
     for loc in SEARCH_LOCATIONS:
         print(f"\n📍 {loc['name']} (半径 {loc['radius_m']}m)")
@@ -416,31 +506,34 @@ def main():
                 places   = fetch_all(loc, biz)
                 filtered = filter_places(places)
 
-                # place_id で重複除去（同業種の別クエリ・別エリアの混入を防ぐ）
-                unique = []
+                # place_id ＋ 店名+住所 の両方で重複除去
+                added = []
                 for p in filtered:
-                    pid = p.get("id", "")
-                    if pid not in seen_ids:
+                    pid  = p.get("id", "")
+                    name = p.get("displayName", {}).get("text", "")
+                    addr = p.get("formattedAddress", "")
+                    key  = (name, addr)
+                    if pid and pid not in seen_ids and key not in seen_keys:
                         seen_ids.add(pid)
-                        unique.append(p)
+                        seen_keys.add(key)
+                        rec = record_from_place(p, loc["name"], label, is_ja)
+                        db.append(rec)
+                        added.append(rec)
 
-                print(f"{len(places)}件取得 → フィルター{len(filtered)}件 → 重複除去後{len(unique)}件")
-                all_results.append({
-                    "location": loc["name"],
-                    "label":    label,
-                    "places":   unique,
-                    "is_ja":    is_ja,
-                })
+                new_count += len(added)
+                print(f"{len(places)}件取得 → フィルター{len(filtered)}件 → 新規追加{len(added)}件")
             except requests.HTTPError as e:
                 print(f"ERROR {e.response.status_code}: {e.response.text[:120]}")
-                all_results.append({"location": loc["name"], "label": label, "places": [], "is_ja": is_ja})
             time.sleep(1)
 
-    total = sum(len(r["places"]) for r in all_results)
-    print(f"\n合計: {total} 件 → {OUTPUT_FILE} 生成中...")
+    print(f"\n今回の新規追加: {new_count} 件 / 累積合計: {len(db)} 件")
 
+    save_db(db)
+    print(f"💾 {PLACES_DB_FILE} 保存完了")
+
+    print(f"\n{OUTPUT_FILE} 生成中...")
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
-    html = generate_html(all_results, generated_at)
+    html = generate_html(db, generated_at)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write(html)
