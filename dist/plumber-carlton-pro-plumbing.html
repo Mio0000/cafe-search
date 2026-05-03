@@ -270,7 +270,7 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1562664377-709f2c337eb2?w=1920&q=80&auto=format')"></div>
+  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1574937612330-ac3c0e9e79f7?w=1920&q=80&auto=format')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bg-shapes">
     <div class="hero-shape"></div>
@@ -324,19 +324,19 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
       <div class="hero-visual">
         <div class="hero-stats-card">
           <div class="hero-stat">
-            <div class="hero-stat-num">88<span style="font-size:28px;">+</span></div>
+            <div class="hero-stat-num"><span class="counter" data-target="88">0</span><span style="font-size:28px;">+</span></div>
             <div class="hero-stat-label">Google Reviews</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">4.7</div>
+            <div class="hero-stat-num"><span class="counter" data-target="4.7" data-decimals="1">0.0</span></div>
             <div class="hero-stat-label">Star Rating</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">10<span style="font-size:28px;">+</span></div>
+            <div class="hero-stat-num"><span class="counter" data-target="10">0</span><span style="font-size:28px;">+</span></div>
             <div class="hero-stat-label">Years Experience</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">100<span style="font-size:24px;">%</span></div>
+            <div class="hero-stat-num"><span class="counter" data-target="100">0</span><span style="font-size:24px;">%</span></div>
             <div class="hero-stat-label">Satisfaction Rate</div>
           </div>
           <div class="hero-rating-card">
@@ -347,7 +347,7 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
               <svg viewBox="0 0 18 18"><path d="M9 1l2.4 5h5.1l-4.1 3 1.5 5L9 11l-4.9 3 1.5-5L1.5 6h5.1z" /></svg>
               <svg viewBox="0 0 18 18"><path d="M9 1l2.4 5h5.1l-4.1 3 1.5 5L9 11l-4.9 3 1.5-5L1.5 6h5.1z" /></svg>
             </div>
-            <div class="hero-rating-text">4.7 Google Rating <span>&mdash; 88 Reviews</span></div>
+            <div class="hero-rating-text"><span class="counter" data-target="4.7" data-decimals="1">0.0</span> Google Rating <span>&mdash; 88 Reviews</span></div>
           </div>
         </div>
       </div>
@@ -442,7 +442,7 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
         <div class="stat-label">Years Experience</div>
       </div>
       <div class="stat-item reveal reveal-delay-2">
-        <div class="stat-num">4.7</div>
+        <div class="stat-num"><span class="counter" data-target="4.7" data-decimals="1">0.0</span></div>
         <div class="stat-label">Star Rating</div>
       </div>
       <div class="stat-item reveal reveal-delay-3">
@@ -938,19 +938,24 @@ window.addEventListener('scroll', () => {
 
 // ── Counter animation
 function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const duration = 1600;
+  if (el.dataset.animated) return;
+  el.dataset.animated = '1';
+  const target = parseFloat(el.dataset.target);
+  const decimals = parseInt(el.dataset.decimals || '0');
+  const duration = 1800;
   const start = performance.now();
   function step(now) {
     const t = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - t, 3);
-    el.textContent = Math.round(eased * target);
+    const val = eased * target;
+    el.textContent = decimals > 0 ? val.toFixed(decimals) : Math.round(val);
     if (t < 1) requestAnimationFrame(step);
-    else el.textContent = target;
+    else el.textContent = decimals > 0 ? target.toFixed(decimals) : target;
   }
   requestAnimationFrame(step);
 }
 
+// observe each individual stat card so animation fires the moment it enters view
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -958,9 +963,9 @@ const counterObserver = new IntersectionObserver((entries) => {
       counterObserver.unobserve(e.target);
     }
   });
-}, { threshold: 0.3 });
-const statsEl = document.getElementById('stats');
-if (statsEl) counterObserver.observe(statsEl);
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.stat-item, .hero-stat').forEach(el => counterObserver.observe(el));
 
 // ── Form handler
 function handleForm(e) {
