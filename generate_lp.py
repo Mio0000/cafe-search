@@ -32,47 +32,57 @@ GOOGLE_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 # ─── Hero images: 5 per category (Unsplash CDN) ──────────────────────────────
 HERO_IMAGES = {
     "Plumber": [
-        "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1562664377-709f2c337eb2?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1574937612330-ac3c0e9e79f7?w=1920&q=80&auto=format",
+        "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1562664377-709f2c337eb2?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1574937612330-ac3c0e9e79f7?w=1920&q=85&auto=format",
     ],
     "Electrician": [
-        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1509390836518-dc36f66a6859?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1569516449771-41c89ee14ca3?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1593068931940-a46b1cf14d85?w=1920&q=80&auto=format",
+        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1509390836518-dc36f66a6859?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1569516449771-41c89ee14ca3?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1593068931940-a46b1cf14d85?w=1920&q=85&auto=format",
     ],
     "Roofing": [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1565364887179-c6307b1f4e26?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1629734440153-ea3e8ddb7eb1?w=1920&q=80&auto=format",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1591588582259-e675bd2e6088?w=1920&q=85&auto=format",
     ],
     "HVAC": [
-        "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1583521214690-73421a1829a9?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80&auto=format",
+        "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1583521214690-73421a1829a9?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=85&auto=format",
     ],
     "Landscaping": [
-        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1920&q=80&auto=format",
+        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1920&q=85&auto=format",
     ],
     "Pest Control": [
-        "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1590496793929-36417d3117de?w=1920&q=80&auto=format",
-        "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1920&q=80&auto=format",
+        "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1590496793929-36417d3117de?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=85&auto=format",
     ],
+}
+
+# ─── About section images: portrait crop per category ────────────────────────
+ABOUT_IMAGES = {
+    "Plumber":      "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=800&h=1067&q=85&auto=format&fit=crop",
+    "Electrician":  "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=1067&q=85&auto=format&fit=crop",
+    "Roofing":      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=1067&q=85&auto=format&fit=crop",
+    "HVAC":         "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=1067&q=85&auto=format&fit=crop",
+    "Landscaping":  "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&h=1067&q=85&auto=format&fit=crop",
+    "Pest Control": "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=800&h=1067&q=85&auto=format&fit=crop",
 }
 
 # ─── SVG icon paths (inner content only; wrap in template) ───────────────────
@@ -435,6 +445,7 @@ def build_context(svc: dict, cat: dict, api: dict | None) -> dict:
         "reviews_row1":  reviews_row1,
         "reviews_row2":  reviews_row2,
         "hero_image":    random.choice(HERO_IMAGES.get(svc["category"], HERO_IMAGES["Plumber"])),
+        "about_image":   ABOUT_IMAGES.get(svc["category"], ABOUT_IMAGES["Plumber"]),
         "phone":         phone,
         "phone_raw":     re.sub(r"\s+", "", phone),
         "year":          date.today().year,
@@ -491,35 +502,39 @@ def write_index(entries: list[tuple[str, str]]) -> None:
 
 
 def deploy_to_vercel() -> None:
-    print("\nDeploying to Vercel...")
-    result = subprocess.run(
-        ["vercel", "--prod", "--yes"],
-        capture_output=True,
-        text=True,
-    )
-    # Echo all output so progress is visible
-    if result.stdout:
-        print(result.stdout, end="")
-    if result.stderr:
-        print(result.stderr, end="", file=sys.stderr)
+    print("\nDeploying via git push → Vercel...")
 
-    if result.returncode == 0:
-        # Extract and highlight the production URL
-        url = None
-        for line in result.stdout.splitlines():
-            if "https://" in line and ("Production" in line or ".vercel.app" in line):
-                # Pick the https:// token from the line
-                for token in line.split():
-                    if token.startswith("https://"):
-                        url = token.rstrip(".,")
-                        break
-            if url:
-                break
-        print(f"\nDeploy complete.")
-        if url:
-            print(f"Production URL: {url}")
+    def run(cmd: list) -> int:
+        r = subprocess.run(cmd, text=True)
+        return r.returncode
+
+    # Stage all generated output + source data
+    run(["git", "add", "dist/", "index.html", "lib/services.json",
+         "generate_lp.py", "multi_search.py", "places_db.json", "search_history.json"])
+
+    # Commit (no-op if nothing changed)
+    commit = subprocess.run(
+        ["git", "commit", "-m", "Update LP pages"],
+        text=True, capture_output=True,
+    )
+    if commit.returncode not in (0, 1):  # 1 = nothing to commit
+        print(commit.stdout)
+        print(commit.stderr, file=sys.stderr)
+        print("git commit failed.", file=sys.stderr)
+        return
+
+    if "nothing to commit" in commit.stdout or "nothing added" in commit.stdout:
+        print("Nothing new to commit.")
     else:
-        print(f"Vercel deploy failed (exit {result.returncode}).", file=sys.stderr)
+        print(commit.stdout.strip())
+
+    push = subprocess.run(["git", "push", "origin", "main"], text=True, capture_output=True)
+    print(push.stdout.strip() or push.stderr.strip())
+    if push.returncode == 0:
+        print("\nPushed. Vercel will build and deploy automatically.")
+        print("Production URL: https://cafe-search-nu.vercel.app/")
+    else:
+        print(f"git push failed (exit {push.returncode}).", file=sys.stderr)
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────

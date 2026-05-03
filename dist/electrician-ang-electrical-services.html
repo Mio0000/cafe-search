@@ -70,8 +70,8 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 
 /* ─── HERO ─── */
 #hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; padding-top: 68px; }
-.hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(100%); opacity: 0.12; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,18,38,0.97) 0%, rgba(74,112,169,0.93) 55%, rgba(90,130,190,0.90) 100%); }
+.hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(20%); opacity: 0.32; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,18,38,0.92) 0%, rgba(74,112,169,0.80) 55%, rgba(90,130,190,0.70) 100%); }
 .hero-bg-shapes { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
 .hero-shape { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.03); animation: floatShape 8s ease-in-out infinite; }
 .hero-shape:nth-child(1) { width: 420px; height: 420px; top: -100px; right: -60px; animation-delay: 0s; }
@@ -170,11 +170,12 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 #about { padding: 120px 0; background: var(--bg); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .about-photo { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; background: var(--text); box-shadow: var(--shadow-lg); }
-.about-photo-placeholder { width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(74,112,169,0.07) 0px, rgba(74,112,169,0.07) 8px, rgba(74,112,169,0.03) 8px, rgba(74,112,169,0.03) 16px); display: flex; align-items: flex-end; padding: 28px; }
-.about-photo-caption { background: var(--white); border-radius: 10px; padding: 16px 20px; width: 100%; box-shadow: var(--shadow); }
-.about-photo-caption p { font-size: 13px; font-weight: 700; color: var(--text); }
-.about-photo-caption span { font-size: 12px; color: var(--blue); font-weight: 600; }
-.about-photo-label { position: absolute; top: 20px; right: 20px; font-size: 10px; color: rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 0.08em; writing-mode: vertical-rl; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+.about-photo:hover img { transform: scale(1.04); }
+.about-photo-badge { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 24px 24px; background: linear-gradient(to top, rgba(10,18,38,0.92) 0%, rgba(10,18,38,0.4) 60%, transparent 100%); }
+.about-photo-caption { }
+.about-photo-caption p { font-size: 14px; font-weight: 800; color: var(--white); }
+.about-photo-caption span { font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 500; letter-spacing: 0.03em; }
 .about-pillars { margin-top: 36px; display: flex; flex-direction: column; gap: 18px; }
 .about-pillar { display: flex; gap: 16px; align-items: flex-start; padding: 20px 22px; border-radius: 10px; background: var(--white); border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow); transition: all .3s ease; }
 .about-pillar:hover { box-shadow: var(--shadow-lg); border-color: rgba(74,112,169,0.2); transform: translateX(4px); }
@@ -235,6 +236,7 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
   .hero-stats-card { grid-template-columns: 1fr 1fr; }
 }
 </style>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
@@ -270,7 +272,7 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1509390836518-dc36f66a6859?w=1920&q=80&auto=format')"></div>
+  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1920&q=85&auto=format')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bg-shapes">
     <div class="hero-shape"></div>
@@ -628,13 +630,13 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
   <div class="container">
     <div class="about-grid">
       <div class="about-photo reveal">
-        <div class="about-photo-placeholder">
+        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&h=1067&q=85&auto=format&fit=crop" alt="ANG ELECTRICAL SERVICES — A-Grade Electrician" loading="lazy" />
+        <div class="about-photo-badge">
           <div class="about-photo-caption">
             <p>ANG ELECTRICAL SERVICES</p>
             <span>A-Grade Electrician &mdash; Clyde North</span>
           </div>
         </div>
-        <div class="about-photo-label">team photo</div>
       </div>
       <div class="about-content reveal reveal-delay-2">
         <div class="section-label">About Us</div>
