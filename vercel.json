@@ -1,16 +1,3 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "generate_lp.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "dist/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/dist/$1" }
-  ]
+  "outputDirectory": "dist"
 }
