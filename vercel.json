@@ -1,4 +1,12 @@
 {
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
   "outputDirectory": "dist",
-  "framework": null
+  "builds": [
+    { "src": "dist/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "handle": "filesystem" }
+  ]
 }
