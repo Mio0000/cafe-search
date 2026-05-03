@@ -109,6 +109,7 @@ FIELD_MASK = ",".join([
     "places.userRatingCount",
     "places.formattedAddress",
     "places.websiteUri",
+    "places.nationalPhoneNumber",
     "nextPageToken",
 ])
 
@@ -235,6 +236,7 @@ def save_services_json(records: list[dict]) -> None:
             "suburb":        suburb,
             "rating":        r.get("rating") or None,
             "reviewCount":   r.get("reviewCount") or None,
+            "phone":         r.get("phone", ""),
             "status":        prev.get("status", "no_website"),
             "googleMapsUrl": prev.get("googleMapsUrl") or gmaps,
             "draftUrl":      prev.get("draftUrl", ""),
@@ -261,6 +263,7 @@ def record_from_place(p: dict, loc_name: str, label: str, is_ja: bool) -> dict:
         "rating":       p.get("rating", ""),
         "reviewCount":  p.get("userRatingCount", ""),
         "address":      p.get("formattedAddress", ""),
+        "phone":        p.get("nationalPhoneNumber", ""),
         "contacted":    False,
         "instagramUrl": instagram_url(name),
         "mailUrl":      mail_url_ja(name) if is_ja else mail_url(name),

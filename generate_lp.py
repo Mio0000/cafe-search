@@ -399,7 +399,7 @@ def build_context(svc: dict, cat: dict, api: dict | None) -> dict:
     # Merge API data over static defaults
     rating       = (api and api.get("rating")) or svc.get("rating") or 4.8
     review_count = (api and api.get("review_count")) or svc.get("reviewCount") or 0
-    phone        = (api and api.get("phone")) or PLACEHOLDER_PHONE
+    phone        = (api and api.get("phone")) or svc.get("phone") or PLACEHOLDER_PHONE
     reviews_raw  = (api and api.get("reviews")) or cat["reviews"]
 
     # Ensure author suburb substitution for static reviews
