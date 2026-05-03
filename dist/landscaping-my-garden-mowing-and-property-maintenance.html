@@ -6,39 +6,38 @@
 <title>My Garden Mowing and Property Maintenance — Hampton Park</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --cream:   #FFF5C9;
-  --teal:    #3C938D;
-  --teal-d:  #2a6b67;
-  --teal-l:  #5db8b1;
-  --gold:    #FECB6E;
-  --gold-d:  #e8a730;
-  --navy:    #2C3E50;
-  --navy-l:  #3d5166;
-  --white:   #ffffff;
-  --dark:    #1a1a1a;
-  --grey:    #6b7280;
-  --font: 'Inter Tight', sans-serif;
+  --bg:     #F9F7F2;
+  --blue:   #4A70A9;
+  --blue-d: #3a5f98;
+  --blue-l: #6b8dbe;
+  --gold:   #FECB6E;
+  --gold-d: #e8a730;
+  --text:   #1F2937;
+  --text-l: #374151;
+  --sub:    #6B7280;
+  --white:  #ffffff;
+  --font: 'Inter', sans-serif;
   --ls-wide: 0.08em;
   --ls-wider: 0.14em;
   --radius: 12px;
-  --shadow: 0 8px 40px rgba(60,147,141,0.13);
-  --shadow-lg: 0 20px 60px rgba(44,62,80,0.18);
+  --shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+  --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
 }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font); background: var(--cream); color: var(--dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
 .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-weight: 700; letter-spacing: var(--ls-wide); text-decoration: none; border: none; cursor: pointer; transition: all .25s ease; border-radius: 6px; white-space: nowrap; }
-.btn-primary { background: var(--gold); color: var(--navy); padding: 16px 32px; font-size: 15px; }
-.btn-primary:hover { background: var(--gold-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(254,203,110,.45); }
-.btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.6); padding: 14px 30px; font-size: 15px; }
-.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-2px); }
-.btn-teal { background: var(--teal); color: var(--white); padding: 14px 28px; font-size: 14px; }
-.btn-teal:hover { background: var(--teal-d); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(60,147,141,.35); }
+.btn-primary { background: var(--blue); color: var(--white); padding: 16px 32px; font-size: 15px; }
+.btn-primary:hover { background: var(--blue-d); transform: translateY(-3px); box-shadow: 0 12px 28px rgba(74,112,169,.35); }
+.btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.5); padding: 14px 30px; font-size: 15px; }
+.btn-outline:hover { background: rgba(255,255,255,0.08); border-color: var(--white); transform: translateY(-3px); }
+.btn-blue { background: var(--blue); color: var(--white); padding: 14px 28px; font-size: 14px; }
+.btn-blue:hover { background: var(--blue-d); transform: translateY(-3px); box-shadow: 0 12px 28px rgba(74,112,169,.3); }
 
 /* ─── SCROLL REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity .75s cubic-bezier(.22,.68,0,1.2), transform .75s cubic-bezier(.22,.68,0,1.2); will-change: opacity, transform; }
@@ -52,100 +51,99 @@ body { font-family: var(--font); background: var(--cream); color: var(--dark); o
 .reveal-scale.visible { opacity: 1; transform: scale(1) translateY(0); }
 
 /* ─── NAV ─── */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,245,201,.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(60,147,141,0.12); transition: box-shadow .3s; }
-nav.scrolled { box-shadow: 0 4px 24px rgba(44,62,80,.1); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(249,247,242,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(74,112,169,0.12); transition: box-shadow .3s; }
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
 .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo-mark { width: 38px; height: 38px; background: var(--teal); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.nav-logo-mark { width: 38px; height: 38px; background: var(--blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
 .nav-logo-mark svg { width: 22px; height: 22px; }
-.nav-logo-text { font-weight: 800; font-size: 16px; color: var(--navy); letter-spacing: 0.02em; line-height: 1.1; }
-.nav-logo-text span { display: block; font-weight: 400; font-size: 11px; color: var(--teal); letter-spacing: var(--ls-wide); }
+.nav-logo-text { font-weight: 800; font-size: 16px; color: var(--text); letter-spacing: 0.02em; line-height: 1.1; }
+.nav-logo-text span { display: block; font-weight: 400; font-size: 11px; color: var(--blue); letter-spacing: var(--ls-wide); }
 .nav-links { display: flex; align-items: center; gap: 32px; }
-.nav-links a { font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: var(--ls-wide); opacity: 0.75; transition: opacity .2s, color .2s; }
-.nav-links a:hover { opacity: 1; color: var(--teal); }
+.nav-links a { font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; letter-spacing: var(--ls-wide); opacity: 0.65; transition: opacity .2s, color .2s; }
+.nav-links a:hover { opacity: 1; color: var(--blue); }
 .nav-cta { display: flex; gap: 10px; align-items: center; }
-.nav-phone { font-size: 14px; font-weight: 700; color: var(--teal); text-decoration: none; letter-spacing: 0.04em; transition: color .2s; }
-.nav-phone:hover { color: var(--teal-d); }
+.nav-phone { font-size: 14px; font-weight: 700; color: var(--blue); text-decoration: none; letter-spacing: 0.04em; transition: color .2s; }
+.nav-phone:hover { color: var(--blue-d); }
 .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
-.nav-burger span { width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all .3s; }
+.nav-burger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
 
 /* ─── HERO ─── */
 #hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; padding-top: 68px; }
-.hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(42,107,103,0.93) 0%, rgba(60,147,141,0.88) 45%, rgba(74,173,166,0.90) 100%); }
+.hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(100%); opacity: 0.12; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,18,38,0.97) 0%, rgba(74,112,169,0.93) 55%, rgba(90,130,190,0.90) 100%); }
 .hero-bg-shapes { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.hero-shape { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.04); animation: floatShape 8s ease-in-out infinite; }
+.hero-shape { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.03); animation: floatShape 8s ease-in-out infinite; }
 .hero-shape:nth-child(1) { width: 420px; height: 420px; top: -100px; right: -60px; animation-delay: 0s; }
 .hero-shape:nth-child(2) { width: 260px; height: 260px; bottom: 60px; right: 220px; animation-delay: -2.5s; }
 .hero-shape:nth-child(3) { width: 160px; height: 160px; top: 180px; left: -40px; animation-delay: -5s; }
-.hero-shape:nth-child(4) { width: 80px; height: 80px; bottom: 160px; left: 240px; animation-delay: -1s; background: rgba(254,203,110,0.12); }
+.hero-shape:nth-child(4) { width: 80px; height: 80px; bottom: 160px; left: 240px; animation-delay: -1s; background: rgba(74,112,169,0.18); }
 @keyframes floatShape { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-22px) scale(1.04); } }
-.hero-grid { position: absolute; inset: 0; z-index: 1; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+.hero-grid { position: absolute; inset: 0; z-index: 1; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
 .hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 80px 0; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 100px; padding: 6px 16px 6px 8px; margin-bottom: 28px; font-size: 12px; font-weight: 600; color: var(--cream); letter-spacing: var(--ls-wide); backdrop-filter: blur(8px); animation: fadeSlideUp .8s ease both; }
-.hero-badge-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--navy); animation: pulseDot 2s ease-in-out infinite; }
-@keyframes pulseDot { 0%, 100% { box-shadow: 0 0 0 0 rgba(254,203,110,.5); } 50% { box-shadow: 0 0 0 8px rgba(254,203,110,0); } }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 6px 16px 6px 8px; margin-bottom: 28px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: var(--ls-wide); backdrop-filter: blur(8px); animation: fadeSlideUp .8s ease both; }
+.hero-badge-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--blue-l); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--white); animation: pulseDot 2s ease-in-out infinite; }
+@keyframes pulseDot { 0%, 100% { box-shadow: 0 0 0 0 rgba(74,112,169,.5); } 50% { box-shadow: 0 0 0 8px rgba(74,112,169,0); } }
 .hero-title { font-size: clamp(38px, 5vw, 64px); font-weight: 900; color: var(--white); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; animation: fadeSlideUp .8s .15s ease both; }
 .hero-title em { font-style: normal; color: var(--gold); position: relative; display: inline-block; }
-.hero-title em::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 3px; background: var(--gold); border-radius: 2px; opacity: 0.5; }
-.hero-sub { margin-top: 20px; font-size: 18px; font-weight: 400; color: rgba(255,255,255,0.82); line-height: 1.6; max-width: 480px; animation: fadeSlideUp .8s .28s ease both; }
+.hero-title em::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 3px; background: var(--gold); border-radius: 1px; opacity: 0.45; }
+.hero-sub { margin-top: 20px; font-size: 18px; font-weight: 400; color: rgba(255,255,255,0.75); line-height: 1.6; max-width: 480px; animation: fadeSlideUp .8s .28s ease both; }
 .hero-trust { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; animation: fadeSlideUp .8s .38s ease both; }
-.hero-trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.88); letter-spacing: var(--ls-wide); }
-.trust-icon { width: 22px; height: 22px; border-radius: 50%; background: rgba(254,203,110,0.2); border: 1px solid rgba(254,203,110,0.5); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.trust-icon svg { width: 12px; height: 12px; }
+.hero-trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.85); }
+.trust-check { width: 15px; height: 15px; flex-shrink: 0; }
 .hero-cta { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; animation: fadeSlideUp .8s .48s ease both; }
 .hero-visual { position: relative; animation: fadeSlideUp .9s .2s ease both; }
-.hero-stats-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.hero-stat { text-align: center; padding: 20px 16px; background: rgba(255,255,255,0.06); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); transition: transform .3s, background .3s; }
-.hero-stat:hover { transform: translateY(-4px); background: rgba(255,255,255,0.12); }
-.hero-stat-num { font-size: 42px; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -0.03em; }
-.hero-stat-label { margin-top: 6px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: var(--ls-wider); text-transform: uppercase; }
-.hero-rating-card { grid-column: span 2; display: flex; align-items: center; justify-content: center; gap: 14px; background: var(--gold); border-radius: 10px; padding: 16px 24px; }
+.hero-stats-card { background: rgba(255,255,255,0.07); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.hero-stat { text-align: center; padding: 20px 16px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.07); transition: transform .3s, background .3s; }
+.hero-stat:hover { transform: translateY(-4px); background: rgba(255,255,255,0.1); }
+.hero-stat-num { font-size: 42px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; }
+.hero-stat-label { margin-top: 6px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: var(--ls-wider); text-transform: uppercase; }
+.hero-rating-card { grid-column: span 2; display: flex; align-items: center; justify-content: center; gap: 14px; background: rgba(74,112,169,0.25); border: 1px solid rgba(107,141,190,0.35); border-radius: 10px; padding: 16px 24px; }
 .hero-rating-stars { display: flex; gap: 3px; }
-.hero-rating-stars svg { width: 18px; height: 18px; fill: var(--navy); }
-.hero-rating-text { font-size: 14px; font-weight: 800; color: var(--navy); }
-.hero-rating-text span { font-weight: 400; opacity: 0.7; }
+.hero-rating-stars svg { width: 18px; height: 18px; fill: var(--gold); }
+.hero-rating-text { font-size: 14px; font-weight: 800; color: var(--white); }
+.hero-rating-text span { font-weight: 400; opacity: 0.65; }
 @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-.hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: var(--ls-wider); animation: fadeSlideUp 1s .8s ease both; z-index: 2; }
-.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent); animation: scrollLine 1.6s ease-in-out infinite; }
+.hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: var(--ls-wider); animation: fadeSlideUp 1s .8s ease both; z-index: 2; }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollLine 1.6s ease-in-out infinite; }
 @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
 /* ─── SECTION HEADERS ─── */
-.section-label { font-size: 11px; font-weight: 700; color: var(--teal); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: 12px; }
-.section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 900; color: var(--navy); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
-.section-title em { font-style: normal; color: var(--teal); }
-.section-sub { margin-top: 14px; font-size: 17px; color: var(--grey); line-height: 1.65; max-width: 560px; }
+.section-label { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: 12px; }
+.section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 900; color: var(--text); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+.section-title em { font-style: normal; color: var(--blue); }
+.section-sub { margin-top: 14px; font-size: 17px; font-weight: 400; color: var(--sub); line-height: 1.65; max-width: 560px; }
 .section-header { margin-bottom: 56px; }
 
 /* ─── SERVICES ─── */
-#services { padding: 120px 0; background: var(--cream); }
+#services { padding: 120px 0; background: var(--bg); }
 .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.service-card { background: var(--white); border: 1px solid rgba(60,147,141,0.1); border-radius: var(--radius); padding: 36px 30px; transition: all .35s ease; cursor: default; position: relative; overflow: hidden; }
-.service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--teal); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
-.service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); border-color: var(--teal-l); }
+.service-card { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: var(--radius); padding: 36px 30px; transition: all .35s ease; cursor: default; position: relative; overflow: hidden; box-shadow: var(--shadow); }
+.service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+.service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-6px); border-color: rgba(74,112,169,0.2); }
 .service-card:hover::before { transform: scaleX(1); }
-.service-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(60,147,141,0.08); margin-bottom: 22px; display: flex; align-items: center; justify-content: center; transition: background .3s; }
-.service-card:hover .service-icon { background: rgba(60,147,141,0.16); }
-.service-icon svg { width: 26px; height: 26px; stroke: var(--teal); stroke-width: 1.8; fill: none; }
-.service-name { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; margin-bottom: 10px; }
-.service-desc { font-size: 14px; line-height: 1.65; color: var(--grey); margin-bottom: 24px; }
-.service-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--teal); text-decoration: none; letter-spacing: var(--ls-wide); transition: gap .25s; }
+.service-icon { width: 52px; height: 52px; border-radius: 10px; background: rgba(74,112,169,0.08); margin-bottom: 22px; display: flex; align-items: center; justify-content: center; transition: background .3s; }
+.service-card:hover .service-icon { background: rgba(74,112,169,0.14); }
+.service-icon svg { width: 26px; height: 26px; stroke: var(--blue); stroke-width: 1.6; fill: none; }
+.service-name { font-size: 18px; font-weight: 800; color: var(--text); letter-spacing: -0.01em; margin-bottom: 10px; }
+.service-desc { font-size: 14px; font-weight: 400; line-height: 1.65; color: var(--sub); margin-bottom: 24px; }
+.service-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--blue); text-decoration: none; letter-spacing: var(--ls-wide); transition: gap .25s; }
 .service-link:hover { gap: 10px; }
-.service-link svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; }
+.service-link svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
 
 /* ─── STATS ─── */
-#stats { background: var(--teal); padding: 56px 0; }
+#stats { background: var(--blue); padding: 56px 0; }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.stat-item { text-align: center; padding: 24px 20px; border-right: 1px solid rgba(255,255,255,0.2); }
+.stat-item { text-align: center; padding: 24px 20px; border-right: 1px solid rgba(255,255,255,0.15); }
 .stat-item:last-child { border-right: none; }
 .stat-num { font-size: 52px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
 .stat-plus { color: var(--gold); }
-.stat-label { margin-top: 8px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: var(--ls-wider); text-transform: uppercase; }
+.stat-label { margin-top: 8px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.65); letter-spacing: var(--ls-wider); text-transform: uppercase; }
 
 /* ─── REVIEWS ─── */
-#reviews { padding: 100px 0; background: var(--navy); overflow: hidden; }
+#reviews { padding: 100px 0; background: var(--text); overflow: hidden; }
 .reviews-header { text-align: center; margin-bottom: 56px; }
-.reviews-header .section-label { color: var(--gold); }
+.reviews-header .section-label { color: var(--blue-l); }
 .reviews-header .section-title { color: var(--white); }
 .marquee-wrapper { display: flex; flex-direction: column; gap: 20px; overflow: hidden; }
 .marquee-row { display: flex; gap: 20px; width: max-content; }
@@ -153,66 +151,67 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(44,62,80,.1); }
 .marquee-row.right { animation: marqueeRight 40s linear infinite; }
 @keyframes marqueeLeft  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes marqueeRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-.review-card { background: var(--white); border-radius: 12px; padding: 28px 30px; width: 340px; flex-shrink: 0; transition: transform .3s; }
+.review-card { background: var(--white); border-radius: 12px; padding: 28px 30px; width: 340px; flex-shrink: 0; box-shadow: var(--shadow); transition: transform .3s; }
 .review-card:hover { transform: translateY(-4px); }
-.review-headline { font-size: 14px; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; margin-bottom: 10px; }
+.review-headline { font-size: 14px; font-weight: 800; color: var(--text); letter-spacing: -0.01em; margin-bottom: 10px; }
 .review-stars { display: flex; gap: 3px; margin-bottom: 12px; }
 .review-stars svg { width: 14px; height: 14px; fill: var(--gold); }
-.review-text { font-size: 13.5px; line-height: 1.7; color: var(--grey); font-weight: 400; }
+.review-text { font-size: 13.5px; font-weight: 400; line-height: 1.7; color: var(--sub); }
 .review-author { margin-top: 16px; display: flex; align-items: center; gap: 10px; }
-.review-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-l), var(--teal-d)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--white); flex-shrink: 0; }
-.review-name { font-size: 13px; font-weight: 700; color: var(--navy); }
-.review-date { font-size: 11px; color: var(--grey); }
+.review-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-l), var(--blue-d)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--white); flex-shrink: 0; }
+.review-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.review-date { font-size: 11px; color: var(--sub); }
 .marquee-fades { position: relative; }
 .marquee-fades::before, .marquee-fades::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
-.marquee-fades::before { left: 0; background: linear-gradient(to right, var(--navy), transparent); }
-.marquee-fades::after  { right: 0; background: linear-gradient(to left, var(--navy), transparent); }
+.marquee-fades::before { left: 0; background: linear-gradient(to right, var(--text), transparent); }
+.marquee-fades::after  { right: 0; background: linear-gradient(to left, var(--text), transparent); }
 
 /* ─── ABOUT ─── */
-#about { padding: 120px 0; background: var(--cream); }
+#about { padding: 120px 0; background: var(--bg); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.about-photo { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; background: var(--navy); box-shadow: var(--shadow-lg); }
-.about-photo-placeholder { width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(60,147,141,0.08) 0px, rgba(60,147,141,0.08) 8px, rgba(60,147,141,0.04) 8px, rgba(60,147,141,0.04) 16px); display: flex; align-items: flex-end; padding: 28px; }
-.about-photo-caption { background: var(--white); border-radius: 10px; padding: 16px 20px; width: 100%; }
-.about-photo-caption p { font-size: 13px; font-weight: 700; color: var(--navy); }
-.about-photo-caption span { font-size: 12px; color: var(--teal); font-weight: 600; }
-.about-photo-label { position: absolute; top: 20px; right: 20px; font-size: 10px; color: rgba(255,255,255,0.35); font-family: 'Courier New', monospace; letter-spacing: 0.08em; writing-mode: vertical-rl; }
+.about-photo { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; background: var(--text); box-shadow: var(--shadow-lg); }
+.about-photo-placeholder { width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(74,112,169,0.07) 0px, rgba(74,112,169,0.07) 8px, rgba(74,112,169,0.03) 8px, rgba(74,112,169,0.03) 16px); display: flex; align-items: flex-end; padding: 28px; }
+.about-photo-caption { background: var(--white); border-radius: 10px; padding: 16px 20px; width: 100%; box-shadow: var(--shadow); }
+.about-photo-caption p { font-size: 13px; font-weight: 700; color: var(--text); }
+.about-photo-caption span { font-size: 12px; color: var(--blue); font-weight: 600; }
+.about-photo-label { position: absolute; top: 20px; right: 20px; font-size: 10px; color: rgba(255,255,255,0.2); font-family: 'Courier New', monospace; letter-spacing: 0.08em; writing-mode: vertical-rl; }
 .about-pillars { margin-top: 36px; display: flex; flex-direction: column; gap: 18px; }
-.about-pillar { display: flex; gap: 16px; align-items: flex-start; padding: 20px 22px; border-radius: 10px; background: var(--white); border: 1px solid rgba(60,147,141,0.1); transition: all .3s ease; }
-.about-pillar:hover { box-shadow: var(--shadow); border-color: var(--teal-l); transform: translateX(4px); }
-.about-pillar-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(60,147,141,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.about-pillar-icon svg { width: 20px; height: 20px; stroke: var(--teal); stroke-width: 1.8; fill: none; }
-.about-pillar-title { font-size: 14px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
-.about-pillar-text { font-size: 13px; color: var(--grey); line-height: 1.6; }
+.about-pillar { display: flex; gap: 16px; align-items: flex-start; padding: 20px 22px; border-radius: 10px; background: var(--white); border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow); transition: all .3s ease; }
+.about-pillar:hover { box-shadow: var(--shadow-lg); border-color: rgba(74,112,169,0.2); transform: translateX(4px); }
+.about-pillar-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(74,112,169,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.about-pillar-icon svg { width: 20px; height: 20px; stroke: var(--blue); stroke-width: 1.6; fill: none; }
+.about-pillar-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.about-pillar-text { font-size: 13px; font-weight: 400; color: var(--sub); line-height: 1.6; }
 
 /* ─── MID CTA ─── */
-#mid-cta { padding: 80px 0; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-l) 100%); position: relative; overflow: hidden; }
+#mid-cta { padding: 80px 0; background: linear-gradient(135deg, var(--text) 0%, var(--text-l) 100%); position: relative; overflow: hidden; }
 .mid-cta-bg { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; }
 .mid-cta-inner { position: relative; z-index: 1; text-align: center; }
 .mid-cta-inner .section-title { color: var(--white); max-width: 600px; margin: 0 auto; }
-.mid-cta-inner .section-sub { color: rgba(255,255,255,0.65); margin: 14px auto 36px; }
+.mid-cta-inner .section-sub { color: rgba(255,255,255,0.6); margin: 14px auto 36px; }
 .mid-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
 /* ─── FOOTER ─── */
-footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
+footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
-.footer-brand-text { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 300px; margin-top: 16px; }
-.footer-heading { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: 18px; }
+.footer-brand-text { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; margin-top: 16px; }
+.footer-heading { font-size: 11px; font-weight: 700; color: var(--blue-l); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: 18px; }
 .footer-links { display: flex; flex-direction: column; gap: 10px; }
-.footer-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color .2s; font-weight: 500; }
+.footer-links a { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--white); }
 .footer-contact { display: flex; flex-direction: column; gap: 10px; }
-.footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
-.footer-contact-item svg { width: 14px; height: 14px; stroke: var(--teal-l); stroke-width: 2; fill: none; flex-shrink: 0; margin-top: 2px; }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
-.footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
-.footer-rating { display: flex; align-items: center; gap: 8px; background: rgba(254,203,110,0.1); border: 1px solid rgba(254,203,110,0.2); border-radius: 100px; padding: 6px 14px; }
+.footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.footer-contact-item svg { width: 14px; height: 14px; stroke: var(--blue-l); stroke-width: 1.8; fill: none; flex-shrink: 0; margin-top: 2px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+.footer-abn { font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 0.03em; }
+.footer-rating { display: flex; align-items: center; gap: 8px; background: rgba(254,203,110,0.08); border: 1px solid rgba(254,203,110,0.18); border-radius: 100px; padding: 6px 14px; }
 .footer-rating-stars { display: flex; gap: 2px; }
 .footer-rating-stars svg { width: 12px; height: 12px; fill: var(--gold); }
 .footer-rating-text { font-size: 12px; font-weight: 700; color: var(--gold); }
 
 /* ─── STICKY MOBILE CTA ─── */
-.sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: var(--navy); border-top: 1px solid rgba(255,255,255,0.1); padding: 12px 20px; gap: 10px; }
+.sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: var(--text); border-top: 1px solid rgba(255,255,255,0.1); padding: 12px 20px; gap: 10px; }
 .sticky-cta a { flex: 1; justify-content: center; }
 
 /* ─── RESPONSIVE ─── */
@@ -227,7 +226,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
 }
 @media (max-width: 600px) {
   .nav-links { display: none; }
-  .nav-cta .btn-teal { display: none; }
+  .nav-cta .btn-blue { display: none; }
   .nav-burger { display: flex; }
   .services-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -260,8 +259,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-cta">
-      <a href="tel:0430101888" class="nav-phone">0430 101 888</a>
-      <a href="#contact" class="btn btn-teal" style="padding:10px 20px;font-size:13px;">Free Quote</a>
+      <a href="tel:1300XXXXXX" class="nav-phone">1300 XXX XXX</a>
+      <a href="#contact" class="btn btn-blue" style="padding:10px 20px;font-size:13px;">Free Quote</a>
     </div>
     <div class="nav-burger" id="nav-burger">
       <span></span><span></span><span></span>
@@ -271,7 +270,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1920&q=80&auto=format')"></div>
+  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1472396961693-142e6e269027?w=1920&q=80&auto=format')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bg-shapes">
     <div class="hero-shape"></div>
@@ -296,36 +295,30 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <div class="hero-trust">
           
           <div class="hero-trust-item">
-            <div class="trust-icon">
-              <svg viewBox="0 0 14 14" fill="none" stroke="#FECB6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 7 L5 10 L12 3" />
-              </svg>
-            </div>
+            <svg class="trust-check" viewBox="0 0 15 15" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+              <path d="M2 7.5L5.5 11L13 3.5" />
+            </svg>
             Reliable, regular service you can count on
           </div>
           
           <div class="hero-trust-item">
-            <div class="trust-icon">
-              <svg viewBox="0 0 14 14" fill="none" stroke="#FECB6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 7 L5 10 L12 3" />
-              </svg>
-            </div>
+            <svg class="trust-check" viewBox="0 0 15 15" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+              <path d="M2 7.5L5.5 11L13 3.5" />
+            </svg>
             Custom designs tailored to your property
           </div>
           
           <div class="hero-trust-item">
-            <div class="trust-icon">
-              <svg viewBox="0 0 14 14" fill="none" stroke="#FECB6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 7 L5 10 L12 3" />
-              </svg>
-            </div>
+            <svg class="trust-check" viewBox="0 0 15 15" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter">
+              <path d="M2 7.5L5.5 11L13 3.5" />
+            </svg>
             Free consultation and competitive pricing
           </div>
           
         </div>
         <div class="hero-cta">
           <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
-          <a href="tel:0430101888" class="btn btn-outline">Call Now</a>
+          <a href="tel:1300XXXXXX" class="btn btn-outline">Call Now</a>
         </div>
       </div>
       <div class="hero-visual">
@@ -378,7 +371,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
       
       <div class="service-card reveal reveal-delay-1">
         <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>
           </svg>
         </div>
@@ -386,13 +379,13 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <p class="service-desc">Regular mowing, edging and lawn care programs to keep your lawn pristine.</p>
         <a href="#contact" class="service-link">
           Book This Service
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
         </a>
       </div>
       
       <div class="service-card reveal reveal-delay-2">
         <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a7 7 0 0 1-9 6.79 7 7 0 0 1-2.19-3.32"/>
           </svg>
         </div>
@@ -400,13 +393,13 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <p class="service-desc">Custom layouts and seasonal planting for stunning year-round colour.</p>
         <a href="#contact" class="service-link">
           Book This Service
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
         </a>
       </div>
       
       <div class="service-card reveal reveal-delay-3">
         <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2C12 2 5 9.5 5 14a7 7 0 0 0 14 0C19 9.5 12 2 12 2z"/>
           </svg>
         </div>
@@ -414,13 +407,13 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <p class="service-desc">Automated watering solutions designed for all garden sizes.</p>
         <a href="#contact" class="service-link">
           Book This Service
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
         </a>
       </div>
       
       <div class="service-card reveal reveal-delay-1">
         <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="7" r="4"/><path d="M12 14a6 6 0 0 1 6 6H6a6 6 0 0 1 6-6z"/><path d="M12 11v3"/>
           </svg>
         </div>
@@ -428,7 +421,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <p class="service-desc">Professional pruning, shaping and removal by trained specialists.</p>
         <a href="#contact" class="service-link">
           Book This Service
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h8M7 3l4 4-4 4" /></svg>
         </a>
       </div>
       
@@ -471,7 +464,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
       <div class="marquee-row left">
         
         <div class="review-card">
-          <div class="review-headline">I can highly recommend Leo’s</div>
+          <div class="review-headline">Transformed Our Backyard</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -479,18 +472,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"I can highly recommend Leo’s services. He took my garden from overgrown to under control! Leo listened attentively to my requests and diligently worked towards achieving them. He arrived punctually and has a friendly demeanor. Very trustworthy."</p>
+          <p class="review-text">"Transformed our overgrown backyard into something we&#39;re genuinely proud of. Great communication and reasonable rates."</p>
           <div class="review-author">
-            <div class="review-avatar">J</div>
+            <div class="review-avatar">E</div>
             <div>
-              <div class="review-name">Jen B</div>
+              <div class="review-name">Emma P.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
         </div>
         
         <div class="review-card">
-          <div class="review-headline">Leo from My Garden Mowing</div>
+          <div class="review-headline">Always On Time</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -498,18 +491,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"Leo from My Garden Mowing and Property Maintenance provides exceptional service that truly stands out. He is reliable, punctual, and takes excellent pride in his work. Unlike many others, Leo pays attention to the finer details-perfect edging, thorough cleanup, and a beautifully even finish every time. His communication is clear and professional, and he consistently goes above and beyond to ensure customer satisfaction. If you’re looking for someone who treats your garden like their own and delivers top-quality results, Leo is the person to call. Highly recommended."</p>
+          <p class="review-text">"Weekly mowing and quarterly maintenance. Always on time, always thorough. Best landscaper we&#39;ve used."</p>
           <div class="review-author">
-            <div class="review-avatar">S</div>
+            <div class="review-avatar">R</div>
             <div>
-              <div class="review-name">SUDHIR GOOLLA</div>
+              <div class="review-name">Robert H.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
         </div>
         
         <div class="review-card">
-          <div class="review-headline">I can highly recommend Leo’s</div>
+          <div class="review-headline">Transformed Our Backyard</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -517,18 +510,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"I can highly recommend Leo’s services. He took my garden from overgrown to under control! Leo listened attentively to my requests and diligently worked towards achieving them. He arrived punctually and has a friendly demeanor. Very trustworthy."</p>
+          <p class="review-text">"Transformed our overgrown backyard into something we&#39;re genuinely proud of. Great communication and reasonable rates."</p>
           <div class="review-author">
-            <div class="review-avatar">J</div>
+            <div class="review-avatar">E</div>
             <div>
-              <div class="review-name">Jen B</div>
+              <div class="review-name">Emma P.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
         </div>
         
         <div class="review-card">
-          <div class="review-headline">Leo from My Garden Mowing</div>
+          <div class="review-headline">Always On Time</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -536,11 +529,11 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"Leo from My Garden Mowing and Property Maintenance provides exceptional service that truly stands out. He is reliable, punctual, and takes excellent pride in his work. Unlike many others, Leo pays attention to the finer details-perfect edging, thorough cleanup, and a beautifully even finish every time. His communication is clear and professional, and he consistently goes above and beyond to ensure customer satisfaction. If you’re looking for someone who treats your garden like their own and delivers top-quality results, Leo is the person to call. Highly recommended."</p>
+          <p class="review-text">"Weekly mowing and quarterly maintenance. Always on time, always thorough. Best landscaper we&#39;ve used."</p>
           <div class="review-author">
-            <div class="review-avatar">S</div>
+            <div class="review-avatar">R</div>
             <div>
-              <div class="review-name">SUDHIR GOOLLA</div>
+              <div class="review-name">Robert H.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
@@ -550,7 +543,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
       <div class="marquee-row right">
         
         <div class="review-card">
-          <div class="review-headline">I’m very happy with Leo’s</div>
+          <div class="review-headline">Beautiful Garden Design</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -558,18 +551,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"I’m very happy with Leo’s work! It was the first time I had selected him to do my overgrown lawns and weeds and he did an amazing job!! I highly recommend him! Great communication with his wife Mia as well and everything went smoothly 👍🏼 Great work Leo &amp; Mia 🙌"</p>
+          <p class="review-text">"Designed and planted our entire front garden. The result is stunning — exactly what we envisioned."</p>
           <div class="review-author">
-            <div class="review-avatar">L</div>
+            <div class="review-avatar">C</div>
             <div>
-              <div class="review-name">Lydianne Mondon</div>
+              <div class="review-name">Claire M.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
         </div>
         
         <div class="review-card">
-          <div class="review-headline">Mia &amp; Leo were amazing</div>
+          <div class="review-headline">Great Attention to Detail</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -577,18 +570,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"Mia &amp; Leo were amazing to deal with! They respond instantly. Leo is amazing at his craft did an excellent job with my background considering the crappy weather conditions leading up to our booking. Affordable and fair pricing and he goes above and beyond!! One satisfied customer and definitely rebooking for regular maintenance!!"</p>
+          <p class="review-text">"Meticulous work, great communication throughout. Everything looks better than it ever did."</p>
           <div class="review-author">
-            <div class="review-avatar">P</div>
+            <div class="review-avatar">T</div>
             <div>
-              <div class="review-name">Pele Tom</div>
+              <div class="review-name">Tom B.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
         </div>
         
         <div class="review-card">
-          <div class="review-headline">I used My Garden Mowing</div>
+          <div class="review-headline">Beautiful Garden Design</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -596,18 +589,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"I used My Garden Mowing and Property Maintenance for the first time and was extremely pleased with the results. Leo arrived on time, communicated clearly, and left the lawn looking immaculate. The quality of his work and attention to detail really stood out. I’ll certainly be a repeat customer and highly recommend Leo to anyone needing a dependable lawn care professional."</p>
+          <p class="review-text">"Designed and planted our entire front garden. The result is stunning — exactly what we envisioned."</p>
           <div class="review-author">
-            <div class="review-avatar">G</div>
+            <div class="review-avatar">C</div>
             <div>
-              <div class="review-name">Gianni Lacota</div>
+              <div class="review-name">Claire M.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
         </div>
         
         <div class="review-card">
-          <div class="review-headline">I’m very happy with Leo’s</div>
+          <div class="review-headline">Great Attention to Detail</div>
           <div class="review-stars">
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
@@ -615,49 +608,11 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
             <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
           </div>
-          <p class="review-text">"I’m very happy with Leo’s work! It was the first time I had selected him to do my overgrown lawns and weeds and he did an amazing job!! I highly recommend him! Great communication with his wife Mia as well and everything went smoothly 👍🏼 Great work Leo &amp; Mia 🙌"</p>
+          <p class="review-text">"Meticulous work, great communication throughout. Everything looks better than it ever did."</p>
           <div class="review-author">
-            <div class="review-avatar">L</div>
+            <div class="review-avatar">T</div>
             <div>
-              <div class="review-name">Lydianne Mondon</div>
-              <div class="review-date">Google Review &mdash; 5 Stars</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="review-card">
-          <div class="review-headline">Mia &amp; Leo were amazing</div>
-          <div class="review-stars">
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-          </div>
-          <p class="review-text">"Mia &amp; Leo were amazing to deal with! They respond instantly. Leo is amazing at his craft did an excellent job with my background considering the crappy weather conditions leading up to our booking. Affordable and fair pricing and he goes above and beyond!! One satisfied customer and definitely rebooking for regular maintenance!!"</p>
-          <div class="review-author">
-            <div class="review-avatar">P</div>
-            <div>
-              <div class="review-name">Pele Tom</div>
-              <div class="review-date">Google Review &mdash; 5 Stars</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="review-card">
-          <div class="review-headline">I used My Garden Mowing</div>
-          <div class="review-stars">
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-            <svg viewBox="0 0 14 14"><path d="M7 1l1.8 3.6H13L9.6 7l1.4 4L7 8.8 3 11l1.4-4L1 4.6h4.2z"/></svg>
-          </div>
-          <p class="review-text">"I used My Garden Mowing and Property Maintenance for the first time and was extremely pleased with the results. Leo arrived on time, communicated clearly, and left the lawn looking immaculate. The quality of his work and attention to detail really stood out. I’ll certainly be a repeat customer and highly recommend Leo to anyone needing a dependable lawn care professional."</p>
-          <div class="review-author">
-            <div class="review-avatar">G</div>
-            <div>
-              <div class="review-name">Gianni Lacota</div>
+              <div class="review-name">Tom B.</div>
               <div class="review-date">Google Review &mdash; 5 Stars</div>
             </div>
           </div>
@@ -689,7 +644,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
           
           <div class="about-pillar">
             <div class="about-pillar-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 2 3 6v6c0 5.25 3.5 10.16 8 11.36C15.5 22.16 19 17.25 19 12V6l-8-4z"/><path d="M8 12l2 2 4-4"/>
               </svg>
             </div>
@@ -701,7 +656,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
           
           <div class="about-pillar">
             <div class="about-pillar-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 3"/>
               </svg>
             </div>
@@ -713,7 +668,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
           
           <div class="about-pillar">
             <div class="about-pillar-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/>
               </svg>
             </div>
@@ -725,7 +680,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
           
           <div class="about-pillar">
             <div class="about-pillar-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 11 12 3l9 8"/><path d="M5 11v9h14v-9"/><circle cx="12" cy="15" r="2"/>
               </svg>
             </div>
@@ -745,18 +700,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
 <section id="mid-cta">
   <div class="mid-cta-bg"></div>
   <div class="container mid-cta-inner reveal">
-    <div class="section-label" style="color:var(--gold);">Ready to Get Started?</div>
+    <div class="section-label" style="color:var(--blue-l);">Ready to Get Started?</div>
     <h2 class="section-title">Get Your Free<br />Assessment Today</h2>
     <p class="section-sub">No obligation. No pressure. Just honest advice from a trusted local expert.</p>
     <div class="mid-cta-btns">
       <a href="#contact" class="btn btn-primary">Get a Free Quote Today</a>
-      <a href="tel:0430101888" class="btn btn-outline">Call Now for Fast Service</a>
+      <a href="tel:1300XXXXXX" class="btn btn-outline">Call Now for Fast Service</a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" style="padding:120px 0;background:var(--cream);">
+<section id="contact" style="padding:120px 0;background:var(--bg);">
   <div class="container">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
       <div class="reveal">
@@ -765,61 +720,61 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <p class="section-sub">Fill in the form and we'll get back to you within 24 hours with an honest assessment.</p>
         <div style="margin-top:36px;display:flex;flex-direction:column;gap:20px;">
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:44px;height:44px;border-radius:10px;background:rgba(60,147,141,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div style="width:44px;height:44px;border-radius:10px;background:rgba(74,112,169,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 3 L7 3 L9 7 L7 9 C8 11 9 12 11 13 L13 11 L17 13 L17 17 C14 19 3 14 3 3Z" />
               </svg>
             </div>
             <div>
-              <div style="font-size:11px;font-weight:700;color:var(--grey);letter-spacing:var(--ls-wider);text-transform:uppercase;">Phone</div>
-              <a href="tel:0430101888" style="font-size:14px;font-weight:600;color:var(--navy);text-decoration:none;">0430 101 888</a>
+              <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:var(--ls-wider);text-transform:uppercase;">Phone</div>
+              <a href="tel:1300XXXXXX" style="font-size:14px;font-weight:600;color:var(--text);text-decoration:none;">1300 XXX XXX</a>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:44px;height:44px;border-radius:10px;background:rgba(60,147,141,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div style="width:44px;height:44px;border-radius:10px;background:rgba(74,112,169,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="10" cy="8" r="3" /><path d="M10 2C6.1 2 3 5.1 3 8c0 5 7 10 7 10s7-5 7-10c0-2.9-2.1-6-7-6z" />
               </svg>
             </div>
             <div>
-              <div style="font-size:11px;font-weight:700;color:var(--grey);letter-spacing:var(--ls-wider);text-transform:uppercase;">Service Area</div>
-              <div style="font-size:14px;font-weight:600;color:var(--navy);">Hampton Park &amp; Surrounding Areas, VIC</div>
+              <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:var(--ls-wider);text-transform:uppercase;">Service Area</div>
+              <div style="font-size:14px;font-weight:600;color:var(--text);">Hampton Park &amp; Surrounding Areas, VIC</div>
             </div>
           </div>
           
           <div style="display:flex;align-items:center;gap:14px;">
-            <div style="width:44px;height:44px;border-radius:10px;background:rgba(60,147,141,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--teal)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <div style="width:44px;height:44px;border-radius:10px;background:rgba(74,112,169,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 5 L10 11 L17 5" /><rect x="2" y="4" width="16" height="12" rx="2" />
               </svg>
             </div>
             <div>
-              <div style="font-size:11px;font-weight:700;color:var(--grey);letter-spacing:var(--ls-wider);text-transform:uppercase;">Google Maps</div>
-              <a href="https://www.google.com/maps/search/My%20Garden%20Mowing%20and%20Property%20Maintenance%20Hampton%20Park%20VIC" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--teal);text-decoration:none;">View on Google Maps</a>
+              <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:var(--ls-wider);text-transform:uppercase;">Google Maps</div>
+              <a href="https://www.google.com/maps/search/My%20Garden%20Mowing%20and%20Property%20Maintenance%20Hampton%20Park%20VIC" target="_blank" rel="noopener" style="font-size:14px;font-weight:600;color:var(--blue);text-decoration:none;">View on Google Maps</a>
             </div>
           </div>
           
         </div>
       </div>
       <div class="reveal reveal-delay-2">
-        <form id="quote-form" style="background:var(--white);border-radius:16px;padding:40px;border:1px solid rgba(60,147,141,0.12);box-shadow:var(--shadow);" onsubmit="handleForm(event)">
+        <form id="quote-form" style="background:var(--white);border-radius:16px;padding:40px;border:1px solid rgba(0,0,0,0.06);box-shadow:var(--shadow);" onsubmit="handleForm(event)">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
             <div>
-              <label style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">FIRST NAME</label>
-              <input type="text" placeholder="John" required style="width:100%;padding:12px 14px;border:1.5px solid rgba(60,147,141,0.2);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--navy);background:var(--cream);transition:border-color .2s;outline:none;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(60,147,141,0.2)'" />
+              <label style="font-size:11px;font-weight:700;color:var(--text);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">FIRST NAME</label>
+              <input type="text" placeholder="John" required style="width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);transition:border-color .2s;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
             </div>
             <div>
-              <label style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">LAST NAME</label>
-              <input type="text" placeholder="Smith" required style="width:100%;padding:12px 14px;border:1.5px solid rgba(60,147,141,0.2);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--navy);background:var(--cream);transition:border-color .2s;outline:none;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(60,147,141,0.2)'" />
+              <label style="font-size:11px;font-weight:700;color:var(--text);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">LAST NAME</label>
+              <input type="text" placeholder="Smith" required style="width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);transition:border-color .2s;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
             </div>
           </div>
           <div style="margin-bottom:16px;">
-            <label style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">PHONE NUMBER</label>
-            <input type="tel" placeholder="0430 101 888" required style="width:100%;padding:12px 14px;border:1.5px solid rgba(60,147,141,0.2);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--navy);background:var(--cream);transition:border-color .2s;outline:none;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(60,147,141,0.2)'" />
+            <label style="font-size:11px;font-weight:700;color:var(--text);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">PHONE NUMBER</label>
+            <input type="tel" placeholder="1300 XXX XXX" required style="width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);transition:border-color .2s;outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'" />
           </div>
           <div style="margin-bottom:16px;">
-            <label style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">SERVICE NEEDED</label>
-            <select required style="width:100%;padding:12px 14px;border:1.5px solid rgba(60,147,141,0.2);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--navy);background:var(--cream);transition:border-color .2s;outline:none;appearance:none;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(60,147,141,0.2)'">
+            <label style="font-size:11px;font-weight:700;color:var(--text);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">SERVICE NEEDED</label>
+            <select required style="width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);transition:border-color .2s;outline:none;appearance:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'">
               <option value="">Select a service...</option>
               
               <option>Lawn Mowing &amp; Edging</option>
@@ -833,14 +788,14 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
             </select>
           </div>
           <div style="margin-bottom:24px;">
-            <label style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">DESCRIBE YOUR ISSUE</label>
-            <textarea placeholder="Tell us about the problem..." rows="4" style="width:100%;padding:12px 14px;border:1.5px solid rgba(60,147,141,0.2);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--navy);background:var(--cream);transition:border-color .2s;outline:none;resize:vertical;" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(60,147,141,0.2)'"></textarea>
+            <label style="font-size:11px;font-weight:700;color:var(--text);letter-spacing:var(--ls-wide);display:block;margin-bottom:6px;">DESCRIBE YOUR ISSUE</label>
+            <textarea placeholder="Tell us about the problem..." rows="4" style="width:100%;padding:12px 14px;border:1.5px solid rgba(0,0,0,0.12);border-radius:8px;font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg);transition:border-color .2s;outline:none;resize:vertical;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='rgba(0,0,0,0.12)'"></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;">
             Get My Free Quote
           </button>
-          <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--grey);">We respond within 24 hours. No obligation.</p>
-          <div id="form-success" style="display:none;margin-top:16px;padding:16px;background:rgba(60,147,141,0.08);border:1px solid var(--teal-l);border-radius:8px;text-align:center;color:var(--teal);font-weight:600;font-size:14px;">
+          <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--sub);">We respond within 24 hours. No obligation.</p>
+          <div id="form-success" style="display:none;margin-top:16px;padding:16px;background:rgba(74,112,169,0.07);border:1px solid rgba(74,112,169,0.25);border-radius:8px;text-align:center;color:var(--blue);font-weight:600;font-size:14px;">
             Thanks! We'll be in touch within 24 hours.
           </div>
         </form>
@@ -860,7 +815,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
               <path d="M10 18A7 7 0 0 1 8.8 5C14.5 4 16 3.5 18 1c1 2 2 4.18 2 8a7 7 0 0 1-9 6.79"/><path d="M10 18v3M7 21h6"/>
             </svg>
           </div>
-          <div class="nav-logo-text" style="color:white;">My Garden Mowing and Property Maintenance<span style="color:var(--teal-l);">Professional Landscaper</span></div>
+          <div class="nav-logo-text" style="color:white;">My Garden Mowing and Property Maintenance<span style="color:var(--blue-l);">Professional Landscaper</span></div>
         </a>
         <p class="footer-brand-text">Hampton Park&#39;s trusted local landscaping. Licensed, insured, and locally owned.</p>
       </div>
@@ -883,7 +838,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
         <div class="footer-contact">
           <div class="footer-contact-item">
             <svg viewBox="0 0 14 14" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2 L5 2 L6.5 5 L5 6.5 C6 8 6 8 7.5 9.5 L9 8 L12 9.5 L12 12 C10 13.5 2 10 2 2Z" /></svg>
-            0430 101 888
+            1300 XXX XXX
           </div>
           <div class="footer-contact-item">
             <svg viewBox="0 0 14 14" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="5" r="2" /><path d="M7 1C4.2 1 2 3.2 2 5c0 3.5 5 8 5 8s5-4.5 5-8c0-1.9-1.2-4-5-4z" /></svg>
@@ -894,6 +849,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
     </div>
     <div class="footer-bottom reveal">
       <div class="footer-copy">&copy; 2026 My Garden Mowing and Property Maintenance. All rights reserved.</div>
+      <div class="footer-abn">ABN: XX XXX XXX XXX</div>
       <div class="footer-rating">
         <div class="footer-rating-stars">
           <svg viewBox="0 0 12 12"><path d="M6 1l1.5 3h3l-2.5 2 1 3L6 7.5 3 9l1-3L1.5 4h3z" /></svg>
@@ -911,7 +867,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); 
 <!-- STICKY MOBILE CTA -->
 <div class="sticky-cta">
   <a href="#contact" class="btn btn-primary">Free Quote</a>
-  <a href="tel:0430101888" class="btn btn-teal">Call Now</a>
+  <a href="tel:1300XXXXXX" class="btn btn-blue">Call Now</a>
 </div>
 
 <script>
@@ -1026,8 +982,7 @@ function handleForm(e) {
   setTimeout(() => {
     document.getElementById('form-success').style.display = 'block';
     btn.textContent = 'Sent!';
-    btn.style.background = 'var(--teal)';
-    btn.style.color = 'white';
+    btn.style.background = 'var(--blue-d)';
   }, 900);
 }
 </script>
