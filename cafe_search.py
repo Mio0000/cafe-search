@@ -26,10 +26,10 @@ PLACES_API_KEY = os.environ.get("PLACES_API_KEY", "YOUR_PLACES_API_KEY")
 
 # 検索中心座標（例: 渋谷駅）
 SEARCH_LOCATION = {
-    "latitude": 35.6580,
-    "longitude": 139.7016,
+   "latitude": -37.8400,   # 例：新宿駅周辺
+    "longitude": 144.9935,
 }
-SEARCH_RADIUS_M = 1000  # 検索半径（メートル）
+SEARCH_RADIUS_M = 50000  # 検索半径（メートル）
 
 # Googleスプレッドシート
 SPREADSHEET_ID = os.environ.get("SPREADSHEET_ID", "1ESdP_FAd2ghCBG7KUHwsA23ntFAHLqQutYoCmj_yQ8Y")
