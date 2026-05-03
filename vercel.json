@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pip install -r requirements.txt && python3 generate_lp.py",
+  "outputDirectory": "dist",
+  "framework": null
+}
