@@ -219,20 +219,19 @@ def save_services_json(records: list[dict]) -> None:
 
     services = []
     processed_ids = set()
-    tradie_cats = {"Plumber", "Electrician", "Roofing", "HVAC", "Landscaping", "Pest Control"}
 
-    # places_db にある Tradie レコードを変換（既存の手動フィールドを引き継ぐ）
     for r in records:
-        if r.get("category") not in tradie_cats:
-            continue
         sid = r["id"]
-        suburb = extract_suburb(r.get("address", ""))
-        gmaps  = f"https://www.google.com/maps/search/{urllib.parse.quote(r['name'] + ' ' + suburb + ' VIC')}"
-        prev   = existing.get(sid, {})
+        location = r.get("location", "")
+        address  = r.get("address", "")
+        suburb   = extract_suburb(address) or location
+        gmaps    = f"https://www.google.com/maps/search/{urllib.parse.quote(r['name'] + ' ' + suburb)}"
+        prev     = existing.get(sid, {})
         services.append({
             "id":            sid,
             "name":          r["name"],
             "category":      r["category"],
+            "location":      location,
             "suburb":        suburb,
             "rating":        r.get("rating") or None,
             "reviewCount":   r.get("reviewCount") or None,
