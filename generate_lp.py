@@ -7,6 +7,7 @@ Usage:
   python3 generate_lp.py --deploy                     # 生成後 Vercel へデプロイ
   GOOGLE_MAPS_API_KEY=AIza... python3 generate_lp.py  # APIで電話番号・評価を取得
 """
+from __future__ import annotations
 import json
 import os
 import random
