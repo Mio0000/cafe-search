@@ -86,6 +86,25 @@ ABOUT_IMAGES = {
     "Pest Control": "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=800&h=1067&q=85&auto=format&fit=crop",
 }
 
+# ─── Scroll-zoom grid images (6 per category) ────────────────────────────────
+def _zi(url: str, w: int, h: int) -> str:
+    """Return an Unsplash URL with explicit w×h crop, reusing the photo ID."""
+    m = re.search(r'(photo-[\w-]+)', url)
+    base = f"https://images.unsplash.com/{m.group(1)}" if m else url.split('?')[0]
+    return f"{base}?w={w}&h={h}&q=80&auto=format&fit=crop"
+
+ZOOM_IMAGES: dict[str, dict[str, str]] = {
+    cat: {
+        "top":          _zi(HERO_IMAGES[cat][1], 1400, 500),
+        "left":         _zi(HERO_IMAGES[cat][2], 600,  750),
+        "center":       _zi(HERO_IMAGES[cat][0], 1000, 700),
+        "right":        _zi(HERO_IMAGES[cat][3], 600,  750),
+        "bottom_left":  _zi(HERO_IMAGES[cat][4], 750,  400),
+        "bottom_right": _zi(ABOUT_IMAGES[cat],   750,  400),
+    }
+    for cat in HERO_IMAGES
+}
+
 # ─── SVG icon paths (inner content only; wrap in template) ───────────────────
 # ViewBox: 0 0 24 24, fill:none, stroke:currentColor, stroke-width:1.8,
 # stroke-linecap:round, stroke-linejoin:round
@@ -459,6 +478,7 @@ def build_context(svc: dict, cat: dict, api: dict | None) -> dict:
         "about_tagline": about_tagline,
         "footer_tagline":f"{suburb}'s trusted local {svc['category'].lower()}. Licensed, insured, and locally owned.",
         "place_id":      svc.get("id", ""),
+        "zoom_images":   ZOOM_IMAGES.get(svc["category"], ZOOM_IMAGES["Plumber"]),
     }
 
 

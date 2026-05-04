@@ -81,7 +81,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 @keyframes floatShape { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-22px) scale(1.04); } }
 .hero-grid { position: absolute; inset: 0; z-index: 1; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
 .hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 80px 0; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 6px 16px 6px 8px; margin-bottom: 28px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: var(--ls-wide); backdrop-filter: blur(8px); animation: fadeSlideUp .8s ease both; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 6px 16px 6px 8px; margin-top: 20px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: var(--ls-wide); backdrop-filter: blur(8px); animation: fadeSlideUp .8s ease both; }
 .hero-badge-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--blue-l); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--white); animation: pulseDot 2s ease-in-out infinite; }
 @keyframes pulseDot { 0%, 100% { box-shadow: 0 0 0 0 rgba(74,112,169,.5); } 50% { box-shadow: 0 0 0 8px rgba(74,112,169,0); } }
 .hero-title { font-size: clamp(38px, 5vw, 64px); font-weight: 900; color: var(--white); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; animation: fadeSlideUp .8s .15s ease both; }
@@ -211,6 +211,14 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
 .footer-rating-stars svg { width: 12px; height: 12px; fill: var(--gold); }
 .footer-rating-text { font-size: 12px; font-weight: 700; color: var(--gold); }
 
+/* ─── SCROLL ZOOM ─── */
+#scroll-zoom { height: 100vh; overflow: hidden; position: relative; background: #111; }
+.sz-grid { display: flex; flex-direction: column; gap: 3px; padding: 3px; height: 100%; width: 100%; }
+.sz-row  { display: flex; gap: 3px; }
+.sz-cell { position: relative; overflow: hidden; }
+.sz-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sz-center { will-change: transform; }
+
 /* ─── STICKY MOBILE CTA ─── */
 .sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: var(--text); border-top: 1px solid rgba(255,255,255,0.1); padding: 12px 20px; gap: 10px; }
 .sticky-cta a { flex: 1; justify-content: center; }
@@ -218,7 +226,6 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; }
-  .hero-visual { order: -1; }
   .services-grid { grid-template-columns: 1fr 1fr; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -272,7 +279,7 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1920&q=85&auto=format')"></div>
+  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1920&q=85&auto=format')"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bg-shapes">
     <div class="hero-shape"></div>
@@ -284,15 +291,15 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
   <div class="container">
     <div class="hero-content">
       <div class="hero-left">
-        <div class="hero-badge">
-          <div class="hero-badge-dot">4.1</div>
-          Google Rated &mdash; Fitzroy's Trusted Plumber
-        </div>
         <h1 class="hero-title">
           Fitzroy Drain &amp; Pipe<br />
           <em>Licensed Plumber</em><br />
           in Fitzroy
         </h1>
+        <div class="hero-badge">
+          <div class="hero-badge-dot">4.1</div>
+          Google Rated &mdash; Fitzroy's Trusted Plumber
+        </div>
         <p class="hero-sub">Expert plumbing solutions for homes and businesses in Fitzroy</p>
         <div class="hero-trust">
           
@@ -698,6 +705,37 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
   </div>
 </section>
 
+<!-- SCROLL ZOOM -->
+<section id="scroll-zoom">
+  <div class="sz-grid">
+    <!-- 上段: ワイド -->
+    <div class="sz-cell sz-surrounding" style="flex:1.8;">
+      <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1400&amp;h=500&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" />
+    </div>
+    <!-- 中段: 左 / 中央（ズーム対象） / 右 -->
+    <div class="sz-row" style="flex:2.5;">
+      <div class="sz-cell sz-surrounding" style="flex:1;">
+        <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&amp;h=750&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" />
+      </div>
+      <div class="sz-cell sz-center" style="flex:2;">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=1000&amp;h=700&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" />
+      </div>
+      <div class="sz-cell sz-surrounding" style="flex:1;">
+        <img src="https://images.unsplash.com/photo-1562664377-709f2c337eb2?w=600&amp;h=750&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" />
+      </div>
+    </div>
+    <!-- 下段: 2カラム -->
+    <div class="sz-row" style="flex:1;">
+      <div class="sz-cell sz-surrounding" style="flex:1;">
+        <img src="https://images.unsplash.com/photo-1574937612330-ac3c0e9e79f7?w=750&amp;h=400&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" />
+      </div>
+      <div class="sz-cell sz-surrounding" style="flex:1;">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=750&amp;h=400&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MID CTA -->
 <section id="mid-cta">
   <div class="mid-cta-bg"></div>
@@ -860,6 +898,8 @@ footer { background: var(--text); border-top: 1px solid rgba(255,255,255,0.06); 
   <a href="tel:1300XXXXXX" class="btn btn-blue">Call Now</a>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 <script>
 // ── Stagger service card children
 document.querySelectorAll('.service-card').forEach(card => {
@@ -968,6 +1008,77 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.05 });
 
 document.querySelectorAll('.stat-item, .hero-stat, .hero-rating-card').forEach(el => counterObserver.observe(el));
+
+// ── Scroll Zoom (GSAP ScrollTrigger) ──
+(function () {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section    = document.getElementById('scroll-zoom');
+  const center     = section && section.querySelector('.sz-center');
+  const surrounding = section && section.querySelectorAll('.sz-surrounding');
+  if (!section || !center) return;
+
+  function init() {
+    // 既存の ScrollTrigger を同セクション分だけ破棄
+    ScrollTrigger.getAll()
+      .filter(t => t.vars.trigger === section)
+      .forEach(t => t.kill());
+
+    gsap.set(center,      { clearProps: 'all' });
+    gsap.set(surrounding, { clearProps: 'all' });
+
+    const sRect = section.getBoundingClientRect();
+    const cRect = center.getBoundingClientRect();
+
+    // section 内での center の中心座標
+    const relCX = cRect.left - sRect.left + cRect.width  / 2;
+    const relCY = cRect.top  - sRect.top  + cRect.height / 2;
+
+    // section 全体を覆うスケール（cover 方式）
+    const finalScale = Math.max(sRect.width / cRect.width, sRect.height / cRect.height);
+
+    // section 中心へ移動するオフセット（screen-space: translateが先に適用される）
+    const tx = sRect.width  / 2 - relCX;
+    const ty = sRect.height / 2 - relCY;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger:       section,
+        start:         'top top',
+        end:           '+=150%',
+        pin:           true,
+        scrub:         1.5,
+        anticipatePin: 1,
+      },
+    });
+
+    // 周囲画像をフェードアウト＋縮小（端から順に）
+    tl.to(surrounding, {
+      opacity: 0,
+      scale:   0.9,
+      ease:    'none',
+      stagger: { amount: 0.2, from: 'edges' },
+    });
+
+    // 中央画像をフルスクリーンへ拡大
+    tl.to(center, {
+      scale:        finalScale,
+      x:            tx,
+      y:            ty,
+      borderRadius: '0px',
+      ease:         'none',
+    }, '<');
+  }
+
+  requestAnimationFrame(init);
+
+  // リサイズ時に再計算
+  new ResizeObserver(() => {
+    ScrollTrigger.getAll().forEach(t => t.kill());
+    requestAnimationFrame(init);
+  }).observe(section);
+})();
 
 // ── Form handler
 function handleForm(e) {
