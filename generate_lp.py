@@ -74,6 +74,20 @@ HERO_IMAGES = {
         "https://images.unsplash.com/photo-1590496793929-36417d3117de?w=1920&q=85&auto=format",
         "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&q=85&auto=format",
     ],
+    "Cafe": [
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1507914372368-b2b085b925a1?w=1920&q=85&auto=format",
+    ],
+    "カフェ": [
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1920&q=85&auto=format",
+        "https://images.unsplash.com/photo-1507914372368-b2b085b925a1?w=1920&q=85&auto=format",
+    ],
 }
 
 # ─── About section images: portrait crop per category ────────────────────────
@@ -84,6 +98,8 @@ ABOUT_IMAGES = {
     "HVAC":         "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=1067&q=85&auto=format&fit=crop",
     "Landscaping":  "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&h=1067&q=85&auto=format&fit=crop",
     "Pest Control": "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=800&h=1067&q=85&auto=format&fit=crop",
+    "Cafe":         "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=1067&q=85&auto=format&fit=crop",
+    "カフェ":        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=1067&q=85&auto=format&fit=crop",
 }
 
 # ─── Scroll-zoom grid images (6 per category) ────────────────────────────────
@@ -353,6 +369,58 @@ CATEGORY_DATA = {
         ],
         "about_tagline": "We protect homes and businesses from pests year-round using safe, effective treatments. Licensed, thorough, and always discreet in {suburb}.",
     },
+    "Cafe": {
+        "tagline":       "Your neighbourhood café in the heart of {suburb}",
+        "nav_icon":      '<path d="M3 9h18M3 9a9 6 0 0 1 18 0M3 9v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9"/><path d="M8 22v-3M16 22v-3"/>',
+        "category_label":"Specialty Coffee & Kitchen",
+        "trust_items": [
+            "Locally roasted single-origin beans",
+            "House-baked pastries daily",
+            "Dog friendly · Free WiFi",
+        ],
+        "services": [
+            {"name": "Espresso Bar",    "desc": "Our house blend and rotating single-origins, pulled to order by our experienced baristas.", "svg": '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>'},
+            {"name": "Filter & Pour Over","desc": "Light-roast filters and V60 pour-overs showcasing the full flavour of each origin.", "svg": '<path d="M8 3H6a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9V3z"/>'},
+            {"name": "All-Day Kitchen",  "desc": "Seasonal breakfast and lunch plates — everything made fresh in-house from local produce.", "svg": '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>'},
+        ],
+        "emergency": False,
+        "license_text":  "Specialty Coffee",
+        "reviews": [
+            {"headline": "Best flat white in the area",  "text": "I've been coming here every morning for two years. The coffee is always perfect and the staff remember your name. Wouldn't go anywhere else.", "author": "Sarah M.", "initial": "S"},
+            {"headline": "Incredible brunch spot",       "text": "The smashed avo and the house granola are out of this world. Such a welcoming space, we stayed for hours.", "author": "James K.", "initial": "J"},
+            {"headline": "My favourite local café",      "text": "The pour over is exceptional — you can really taste the care they put into sourcing. Staff are warm and knowledgeable.", "author": "Anna P.", "initial": "A"},
+            {"headline": "Cosy and always consistent",   "text": "Rain or shine this is our Sunday ritual. Coffee is consistently excellent and the pastries are baked fresh daily.", "author": "Michael C.", "initial": "M"},
+            {"headline": "Hidden gem of {suburb}",       "text": "So glad we stumbled in. Beautiful fitout, incredible single-origin espresso and the banana bread is a must.", "author": "Lucy W.", "initial": "L"},
+            {"headline": "Worth the wait on weekends",   "text": "There's always a queue on weekends but it moves fast and is absolutely worth it. The eggs benedict is perfect.", "author": "Tom B.", "initial": "T"},
+        ],
+        "about_tagline": "We opened our doors in {suburb} with one goal: to serve beautiful coffee and honest food in a space that feels like home. Every bean is sourced with care, every dish made fresh.",
+        "hours_display": "Mon – Fri  7:00 am – 4:00 pm\nSat – Sun  8:00 am – 3:00 pm",
+    },
+    "カフェ": {
+        "tagline":       "{suburb}の中心にある、ご近所カフェ",
+        "nav_icon":      '<path d="M3 9h18M3 9a9 6 0 0 1 18 0M3 9v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9"/><path d="M8 22v-3M16 22v-3"/>',
+        "category_label":"スペシャルティコーヒー",
+        "trust_items": [
+            "地元産シングルオリジンコーヒー",
+            "毎朝焼きたてのパン・スイーツ",
+            "ペット可・無料Wi-Fi完備",
+        ],
+        "services": [
+            {"name": "エスプレッソバー",    "desc": "ハウスブレンドとローテーションのシングルオリジンを熟練バリスタがご提供します。", "svg": '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/>'},
+            {"name": "フィルター & ハンドドリップ","desc": "各産地の風味を最大限に引き出す、ライトローストのフィルターとV60ハンドドリップ。", "svg": '<path d="M8 3H6a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M9 3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9V3z"/>'},
+            {"name": "オールデイキッチン",  "desc": "旬の食材を使ったブレックファストとランチ。すべて店内で手作りしています。", "svg": '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>'},
+        ],
+        "emergency": False,
+        "license_text":  "スペシャルティコーヒー",
+        "reviews": [
+            {"headline": "エリア最高のフラットホワイト", "text": "2年間毎朝通っています。コーヒーは常に完璧で、スタッフが名前を覚えてくれています。", "author": "田中 さおり", "initial": "田"},
+            {"headline": "最高のブランチスポット",       "text": "スマッシュドアボカドとグラノーラは絶品です。居心地がよくて何時間でもいられます。", "author": "鈴木 健太", "initial": "鈴"},
+            {"headline": "お気に入りのカフェ",            "text": "ハンドドリップが格別です。産地へのこだわりが伝わってきます。スタッフも温かいです。", "author": "佐藤 あんな", "initial": "佐"},
+            {"headline": "いつも安定の美味しさ",          "text": "週末の定番スポットです。コーヒーもパンも毎回ブレがなく本当においしい。", "author": "山田 みちる", "initial": "山"},
+        ],
+        "about_tagline": "{suburb}に、コーヒーと食事を通じてくつろげる場所をつくりたい——そんな思いで店をオープンしました。豆は産地を訪れて選び、食材は地元農家から仕入れています。",
+        "hours_display": "月〜金  7:00 〜 16:00\n土・日  8:00 〜 15:00",
+    },
 }
 
 PLACEHOLDER_PHONE = "1300 XXX XXX"
@@ -476,7 +544,9 @@ def build_context(svc: dict, cat: dict, api: dict | None) -> dict:
         "trust_items":   cat["trust_items"],
         "pillars":       _PILLARS,
         "about_tagline": about_tagline,
-        "footer_tagline":f"{suburb}'s trusted local {svc['category'].lower()}. Licensed, insured, and locally owned.",
+        "footer_tagline":f"{suburb}'s beloved local {svc['category'].lower()}. Serving great coffee and honest food since day one.",
+        "hours_display": cat.get("hours_display", "Mon–Fri  7am–4pm\nSat–Sun  8am–3pm"),
+        "is_cafe":       svc["category"] in ("Cafe", "カフェ"),
         "place_id":      svc.get("id", ""),
         "zoom_images":   ZOOM_IMAGES.get(svc["category"], ZOOM_IMAGES["Plumber"]),
     }

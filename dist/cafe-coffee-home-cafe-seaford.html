@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coffee Home Cafe Seaford — Café · Seaford</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream:    #F7F2EA;
+  --linen:    #EDE3D2;
+  --linen-d:  #D8CABB;
+  --espresso: #191009;
+  --roast:    #3A2011;
+  --bark:     #58361E;
+  --stone:    #796050;
+  --warm:     #9A8370;
+  --gold:     #C48B44;
+  --gold-l:   #D9A868;
+  --gold-d:   #A46D28;
+  --white:    #FFFFFF;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --ls-tight: -0.025em;
+  --ls-wide:  0.07em;
+  --ls-wider: 0.15em;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); background: var(--cream); color: var(--espresso); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+
+/* ─── BUTTONS ─── */
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-weight: 500; letter-spacing: var(--ls-wider); text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all .28s ease; white-space: nowrap; font-size: 11px; }
+.btn-gold { background: var(--gold); color: var(--white); padding: 14px 36px; }
+.btn-gold:hover { background: var(--gold-d); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(196,139,68,.3); }
+.btn-wire { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.4); padding: 13px 34px; }
+.btn-wire:hover { background: rgba(255,255,255,.08); border-color: var(--white); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--espresso); border: 1px solid rgba(25,16,9,.22); padding: 13px 34px; }
+.btn-outline:hover { background: var(--espresso); color: var(--cream); transform: translateY(-2px); }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(.16,.84,.44,1), transform 1s cubic-bezier(.16,.84,.44,1); }
+.reveal.vis { opacity: 1; transform: none; }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; }
+.rc { opacity: 0; transform: translateY(20px); transition: opacity .75s cubic-bezier(.16,.84,.44,1), transform .75s cubic-bezier(.16,.84,.44,1); }
+.rc.vis { opacity: 1; transform: none; }
+
+/* ─── NAV ─── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: background .5s, box-shadow .5s; }
+nav.top  { background: transparent; }
+nav.down { background: rgba(247,242,234,.97); backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(58,33,18,.09); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.nav-logo { text-decoration: none; }
+.nav-name { font-family: var(--font-serif); font-size: 16px; font-weight: 600; color: var(--white); letter-spacing: .01em; transition: color .4s; }
+nav.down .nav-name { color: var(--espresso); }
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a { font-size: 11px; font-weight: 400; letter-spacing: var(--ls-wider); text-transform: uppercase; text-decoration: none; color: rgba(255,255,255,.65); transition: color .25s; }
+nav.down .nav-links a { color: var(--stone); }
+.nav-links a:hover { color: rgba(255,255,255,.95); }
+nav.down .nav-links a:hover { color: var(--espresso); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.nav-phone { font-family: var(--font-serif); font-size: 14px; color: rgba(255,255,255,.85); text-decoration: none; transition: color .25s; }
+nav.down .nav-phone { color: var(--bark); }
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-burger span { width: 20px; height: 1px; background: var(--white); transition: all .3s; }
+nav.down .nav-burger span { background: var(--espresso); }
+
+/* ══════════════════════════════════════════
+   HERO  — full screen, name only
+══════════════════════════════════════════ */
+#hero { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  will-change: transform;
+}
+/* Two-layer overlay: subtle dark vignette */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 90% at 50% 50%, rgba(25,16,9,.08) 0%, rgba(25,16,9,.62) 100%),
+    linear-gradient(to bottom, rgba(25,16,9,.28) 0%, rgba(25,16,9,.55) 100%);
+}
+/* Noise grain */
+.hero-grain {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.038'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay; opacity: .6;
+}
+
+.hero-center {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 0 32px;
+  user-select: none;
+}
+.hero-location {
+  font-size: 10px; font-weight: 400; letter-spacing: .28em;
+  text-transform: uppercase; color: rgba(255,255,255,.55);
+  margin-bottom: 28px;
+  animation: fadeIn 1.4s 1s ease both;
+}
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(52px, 9vw, 128px);
+  font-weight: 400; font-style: italic;
+  color: var(--white);
+  line-height: 1; letter-spacing: var(--ls-tight);
+  animation: fadeIn 1.4s .4s ease both;
+}
+.hero-rule {
+  display: block; width: 1px; height: 52px;
+  background: linear-gradient(to bottom, rgba(255,255,255,.55), transparent);
+  margin: 36px auto 0;
+  animation: fadeIn 1.4s 1.2s ease both;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Scroll indicator bottom */
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.3); font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  animation: fadeIn 1.4s 1.6s ease both;
+}
+.scroll-line { width: 1px; height: 32px; background: linear-gradient(to bottom, rgba(255,255,255,.42), transparent); animation: sln 2s ease-in-out infinite; }
+@keyframes sln { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ─── QUOTE BAND ─── */
+.quote-band { position: relative; overflow: hidden; padding: 88px 0; background: var(--espresso); }
+.qb-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 70% 80% at 20% 50%, rgba(196,139,68,.1) 0%, transparent 55%), radial-gradient(ellipse 55% 70% at 80% 40%, rgba(58,32,17,.5) 0%, transparent 50%); }
+.qb-inner { position: relative; z-index: 1; text-align: center; padding: 0 40px; }
+.qb-eyebrow { font-size: 10px; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--gold-l); margin-bottom: 20px; display: block; }
+.qb-text { font-family: var(--font-serif); font-size: clamp(20px, 3.2vw, 40px); font-weight: 400; font-style: italic; color: var(--white); line-height: 1.3; letter-spacing: var(--ls-tight); }
+.qb-line { display: block; width: 32px; height: 1px; background: var(--gold); margin: 22px auto 0; opacity: .5; }
+
+/* ─── SECTION LABELS ─── */
+.slabel { font-size: 10px; font-weight: 400; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--gold-d); display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.slabel::before { content: ''; width: 20px; height: 1px; background: currentColor; display: block; flex-shrink: 0; }
+.slabel.on-dark { color: var(--gold-l); }
+.stitle { font-family: var(--font-serif); font-size: clamp(26px, 3.6vw, 46px); font-weight: 700; line-height: 1.1; letter-spacing: var(--ls-tight); text-wrap: balance; }
+.stitle em { font-style: italic; color: var(--bark); }
+.stitle.on-dark { color: var(--white); }
+.stitle.on-dark em { color: var(--gold-l); }
+.ssub { margin-top: 14px; font-size: 15px; font-weight: 300; color: var(--stone); line-height: 1.85; max-width: 500px; }
+.sheader { margin-bottom: 52px; }
+
+/* ─── MENU / SERVICES ─── */
+#menu { padding: 108px 0; background: var(--cream); }
+
+/* Cafe: 2-col layout — header left, items right */
+.menu-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.menu-list  { border-top: 1px solid var(--linen-d); }
+.menu-item  { display: grid; grid-template-columns: 48px 1fr; gap: 20px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--linen-d); transition: padding-left .3s ease; }
+.menu-item:hover { padding-left: 6px; }
+.menu-item-num  { font-family: var(--font-serif); font-size: 11px; font-style: italic; color: var(--gold-d); letter-spacing: .06em; padding-top: 3px; opacity: .75; }
+.menu-item-name { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--espresso); letter-spacing: var(--ls-tight); margin-bottom: 6px; }
+.menu-item-desc { font-size: 13px; font-weight: 300; line-height: 1.8; color: var(--stone); }
+
+/* Tradie: original card grid */
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--linen-d); border: 1px solid var(--linen-d); overflow: hidden; }
+.menu-card { background: var(--cream); padding: 44px 36px 40px; position: relative; overflow: hidden; transition: background .35s; }
+.menu-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
+.menu-card:hover { background: var(--white); }
+.menu-card:hover::after { transform: scaleX(1); }
+.menu-num  { font-family: var(--font-serif); font-size: 10px; font-style: italic; color: var(--gold-d); letter-spacing: .08em; margin-bottom: 22px; display: block; opacity: .8; }
+.menu-icon { width: 44px; height: 44px; border: 1px solid var(--linen-d); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; transition: border-color .3s, background .3s; }
+.menu-card:hover .menu-icon { border-color: var(--gold); background: rgba(196,139,68,.05); }
+.menu-icon svg { width: 20px; height: 20px; stroke: var(--bark); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.menu-name { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--espresso); letter-spacing: var(--ls-tight); margin-bottom: 10px; }
+.menu-desc { font-size: 13px; font-weight: 300; line-height: 1.8; color: var(--stone); }
+
+/* ─── PHOTO GRID (static, no animation) ─── */
+#gallery { padding: 0; background: var(--espresso); }
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 300px);
+  gap: 3px;
+}
+.photo-grid .pg-item { overflow: hidden; position: relative; }
+.photo-grid .pg-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; filter: brightness(.92); }
+.photo-grid .pg-item:hover img { transform: scale(1.04); }
+
+/* ─── STORY ─── */
+#story { padding: 108px 0; background: var(--linen); }
+.story-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 88px; align-items: center; }
+.story-cafe { max-width: 640px; }
+.story-photo { position: relative; border-radius: 2px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 20px 60px rgba(25,16,9,.14); }
+.story-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .9s ease; }
+.story-photo:hover img { transform: scale(1.04); }
+.story-photo-foot { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 22px 20px; background: linear-gradient(to top, rgba(25,16,9,.86), transparent); }
+.story-photo-name { font-family: var(--font-serif); font-size: 14px; font-weight: 600; color: var(--white); }
+.story-photo-sub  { font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .04em; margin-top: 2px; }
+.story-text { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--stone); margin-top: 16px; }
+.pillars { margin-top: 36px; border-top: 1px solid var(--linen-d); }
+.pillar { display: flex; gap: 16px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--linen-d); transition: padding-left .3s ease; }
+.pillar:hover { padding-left: 6px; }
+.pillar-icon { width: 34px; height: 34px; border-radius: 50%; background: rgba(88,54,30,.07); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.pillar-icon svg { width: 16px; height: 16px; stroke: var(--bark); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.pillar-name { font-family: var(--font-serif); font-size: 14px; font-weight: 600; color: var(--espresso); margin-bottom: 2px; }
+.pillar-text { font-size: 13px; font-weight: 300; color: var(--stone); line-height: 1.65; }
+
+
+/* ─── VISIT ─── */
+#visit { padding: 104px 0; background: var(--cream); }
+.visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.hours-table { margin-top: 32px; border-top: 1px solid var(--linen-d); }
+.hr-row { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--linen-d); }
+.hr-days { font-size: 13.5px; font-weight: 400; color: var(--espresso); }
+.hr-time { font-size: 13px; font-weight: 300; color: var(--stone); }
+.visit-contact { display: flex; flex-direction: column; gap: 26px; margin-top: 32px; }
+.vc-row { display: flex; gap: 16px; align-items: flex-start; }
+.vc-icon { width: 38px; height: 38px; border-radius: 50%; background: rgba(88,54,30,.07); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.vc-icon svg { width: 16px; height: 16px; stroke: var(--bark); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.vc-label { font-size: 9px; font-weight: 500; color: var(--warm); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: 4px; }
+.vc-val { font-family: var(--font-serif); font-size: 15px; font-weight: 600; color: var(--espresso); line-height: 1.4; }
+.vc-val a { color: var(--bark); text-decoration: none; }
+.vc-val a:hover { color: var(--gold-d); }
+
+/* ─── CTA BAND ─── */
+#cta { padding: 92px 0; background: var(--bark); position: relative; overflow: hidden; }
+.cta-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 55% at 22% 50%, rgba(196,139,68,.12) 0%, transparent 55%), radial-gradient(ellipse 50% 65% at 80% 45%, rgba(25,16,9,.3) 0%, transparent 50%); }
+.cta-inner { position: relative; z-index: 1; text-align: center; }
+.cta-line  { display: block; width: 30px; height: 1px; background: var(--gold-l); margin: 18px auto; opacity: .5; }
+.cta-btns  { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--espresso); border-top: 1px solid rgba(255,255,255,.05); padding: 56px 0 28px; }
+.footer-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 40px; }
+.footer-brand { font-family: var(--font-serif); font-size: 18px; font-weight: 400; font-style: italic; color: var(--white); text-decoration: none; display: block; }
+.footer-sub { font-size: 10px; font-weight: 300; color: rgba(255,255,255,.4); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-top: 4px; }
+.footer-tagline { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.35); line-height: 1.85; max-width: 260px; margin-top: 16px; }
+.footer-head { font-size: 10px; font-weight: 400; color: var(--gold-l); letter-spacing: var(--ls-wider); text-transform: uppercase; margin-bottom: 16px; }
+.footer-links { display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.38); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: rgba(255,255,255,.85); }
+.footer-ci { display: flex; flex-direction: column; gap: 8px; }
+.footer-ci-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.38); line-height: 1.6; }
+.footer-ci-row svg { width: 11px; height: 11px; stroke: var(--gold); stroke-width: 1.8; fill: none; flex-shrink: 0; margin-top: 3px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+.footer-rating { display: flex; align-items: center; gap: 6px; }
+.footer-rating svg { width: 9px; height: 9px; fill: var(--gold); opacity: .7; }
+.footer-rating-txt { font-size: 11px; color: rgba(255,255,255,.28); }
+
+/* ─── STICKY MOBILE ─── */
+.sticky-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: var(--espresso); border-top: 1px solid rgba(255,255,255,.1); padding: 11px 18px; gap: 8px; }
+.sticky-bar a { flex: 1; justify-content: center; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  .photo-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 220px); }
+  .story-grid { grid-template-columns: 1fr; gap: 44px; }
+  .story-photo { aspect-ratio: 4/3; max-width: 440px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .visit-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-row { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .menu-grid { grid-template-columns: 1fr 1fr; }
+  .menu-split { grid-template-columns: 1fr; gap: 44px; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 180px); }
+  .footer-row { grid-template-columns: 1fr; gap: 32px; }
+  .sticky-bar { display: flex; }
+  .hero-name { font-size: clamp(42px, 13vw, 72px); }
+}
+</style>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav" class="top">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="nav-name">Coffee Home Cafe Seaford</span>
+    </a>
+    <div class="nav-links">
+      
+      <a href="#menu">Menu</a>
+      <a href="#story">Story</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#visit">Visit</a>
+      
+    </div>
+    <div class="nav-right">
+      <a href="tel:1300XXXXXX" class="nav-phone">1300 XXX XXX</a>
+    </div>
+    <div class="nav-burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ══ HERO — name only ══ -->
+<section id="hero">
+  <div class="hero-bg" id="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1920&q=85&auto=format')"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-center">
+    <div class="hero-location">Seaford · Specialty Coffee</div>
+    <h1 class="hero-name">Coffee Home Cafe Seaford</h1>
+    <span class="hero-rule"></span>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <div class="qb-glow"></div>
+  <div class="qb-inner reveal">
+    <span class="qb-eyebrow">Our Promise</span>
+    <div class="qb-text">
+      "Good coffee, honest food,<br>a place you can always come back to."
+      
+    </div>
+    <span class="qb-line"></span>
+  </div>
+</div>
+
+<!-- MENU / SERVICES -->
+<section id="menu">
+  <div class="container">
+    
+    <div class="menu-split">
+      <div class="reveal">
+        <div class="slabel">What We Serve</div>
+        <h2 class="stitle">Our Menu<br><em>Made with Care</em></h2>
+        <p class="ssub" style="margin-top:18px;">Everything on the menu is made in-house. Beans sourced direct, food seasonal and local.</p>
+      </div>
+      <div class="menu-list reveal d2">
+        
+        <div class="menu-item">
+          <div class="menu-item-num">01</div>
+          <div>
+            <div class="menu-item-name">Espresso Bar</div>
+            <p class="menu-item-desc">Our house blend and rotating single-origins, pulled to order by our experienced baristas.</p>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-item-num">02</div>
+          <div>
+            <div class="menu-item-name">Filter &amp; Pour Over</div>
+            <p class="menu-item-desc">Light-roast filters and V60 pour-overs showcasing the full flavour of each origin.</p>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div class="menu-item-num">03</div>
+          <div>
+            <div class="menu-item-name">All-Day Kitchen</div>
+            <p class="menu-item-desc">Seasonal breakfast and lunch plates — everything made fresh in-house from local produce.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- PHOTO GRID (static, 6 equal cells) -->
+<section id="gallery">
+  <div class="photo-grid">
+    <div class="pg-item"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1400&amp;h=500&amp;q=80&amp;auto=format&amp;fit=crop"          alt="" loading="lazy" /></div>
+    <div class="pg-item"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1000&amp;h=700&amp;q=80&amp;auto=format&amp;fit=crop"       alt="" loading="lazy" /></div>
+    <div class="pg-item"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=600&amp;h=750&amp;q=80&amp;auto=format&amp;fit=crop"        alt="" loading="lazy" /></div>
+    <div class="pg-item"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&amp;h=750&amp;q=80&amp;auto=format&amp;fit=crop"         alt="" loading="lazy" /></div>
+    <div class="pg-item"><img src="https://images.unsplash.com/photo-1507914372368-b2b085b925a1?w=750&amp;h=400&amp;q=80&amp;auto=format&amp;fit=crop"  alt="" loading="lazy" /></div>
+    <div class="pg-item"><img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=750&amp;h=400&amp;q=80&amp;auto=format&amp;fit=crop" alt="" loading="lazy" /></div>
+  </div>
+</section>
+
+<!-- STORY / ABOUT -->
+<section id="story">
+  <div class="container">
+    <div class="story-cafe">
+      
+      <div class="reveal ">
+        <div class="slabel">Our Story</div>
+        <h2 class="stitle">A place to slow<br><em>down & savour</em></h2>
+        <p class="story-text">We opened our doors in Seaford with one goal: to serve beautiful coffee and honest food in a space that feels like home. Every bean is sourced with care, every dish made fresh.</p>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="container">
+    <div class="visit-grid">
+      <div class="reveal">
+        <div class="slabel">Opening Hours</div>
+        <h2 class="stitle">Come<br><em>Find Us</em></h2>
+        <div class="hours-table">
+          
+          
+          
+          <div class="hr-row">
+            <span class="hr-days">Mon – Fri</span>
+            <span class="hr-time">7:00 am – 4:00 pm</span>
+          </div>
+          
+          
+          <div class="hr-row">
+            <span class="hr-days">Sat – Sun</span>
+            <span class="hr-time">8:00 am – 3:00 pm</span>
+          </div>
+          
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="slabel">Get in Touch</div>
+        <h2 class="stitle">We'd Love<br><em>to See You</em></h2>
+        <div class="visit-contact">
+          <div class="vc-row">
+            <div class="vc-icon"><svg viewBox="0 0 20 20"><path d="M3 3L7 3L9 7L7 9C8 11 9 12 11 13L13 11L17 13L17 17C14 19 3 14 3 3Z"/></svg></div>
+            <div><div class="vc-label">Phone</div><div class="vc-val"><a href="tel:1300XXXXXX">1300 XXX XXX</a></div></div>
+          </div>
+          <div class="vc-row">
+            <div class="vc-icon"><svg viewBox="0 0 20 20"><circle cx="10" cy="8" r="3"/><path d="M10 2C6.1 2 3 5.1 3 8c0 5 7 10 7 10s7-5 7-10c0-2.9-2.1-6-7-6z"/></svg></div>
+            <div><div class="vc-label">Location</div><div class="vc-val">Seaford, VIC</div></div>
+          </div>
+          
+          <div class="vc-row">
+            <div class="vc-icon"><svg viewBox="0 0 20 20"><path d="M10 11C7.2 11 5 8.8 5 6s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z"/><path d="M10 11L4 19h12L10 11z"/></svg></div>
+            <div><div class="vc-label">Directions</div><div class="vc-val"><a href="https://www.google.com/maps/search/Coffee%20Home%20Cafe%20Seaford%20Seaford" target="_blank" rel="noopener">Open in Google Maps →</a></div></div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="container cta-inner reveal">
+    <div class="slabel on-dark" style="justify-content:center;">Come Visit Us</div>
+    <span class="cta-line"></span>
+    <h2 class="stitle on-dark">Stop by and say hello</h2>
+    <p style="color:rgba(255,255,255,.45);font-size:14px;font-weight:300;margin:12px auto 0;max-width:400px;text-align:center;line-height:1.75;">
+      Open seven days. No reservation needed.
+      
+    </p>
+    <div class="cta-btns">
+      
+      <a href="#visit"  class="btn btn-gold">See Opening Hours</a>
+      <a href="https://www.google.com/maps/search/Coffee%20Home%20Cafe%20Seaford%20Seaford" target="_blank" class="btn btn-wire">Get Directions</a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-row reveal">
+      <div>
+        <a href="#" class="footer-brand">Coffee Home Cafe Seaford</a>
+        <div class="footer-sub">Specialty Coffee &amp; Kitchen</div>
+        <p class="footer-tagline">Seaford&#39;s beloved local cafe. Serving great coffee and honest food since day one.</p>
+      </div>
+      <div>
+        <div class="footer-head">Menu</div>
+        <div class="footer-links">
+          <a href="#menu">Espresso Bar</a><a href="#menu">Filter &amp; Pour Over</a><a href="#menu">All-Day Kitchen</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-head">Visit</div>
+        <div class="footer-ci">
+          <div class="footer-ci-row">
+            <svg viewBox="0 0 14 14" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2L5 2L6.5 5L5 6.5C6 8 6 8 7.5 9.5L9 8L12 9.5L12 12C10 13.5 2 10 2 2Z"/></svg>
+            1300 XXX XXX
+          </div>
+          <div class="footer-ci-row">
+            <svg viewBox="0 0 14 14" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="5" r="2"/><path d="M7 1C4.2 1 2 3.2 2 5c0 3.5 5 8 5 8s5-4.5 5-8c0-1.9-1.2-4-5-4z"/></svg>
+            Seaford, VIC
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom reveal">
+      <div class="footer-copy">&copy; 2026 Coffee Home Cafe Seaford. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE -->
+<div class="sticky-bar">
+  
+  <a href="#visit"              class="btn btn-gold"    style="flex:1;justify-content:center;">Hours &amp; Location</a>
+  <a href="tel:1300XXXXXX" class="btn btn-outline" style="flex:1;justify-content:center;background:var(--roast);color:var(--cream);border:none;">Call Us</a>
+  
+</div>
+
+<script>
+// ── Stagger pillar children ──
+document.querySelectorAll('.pillar').forEach((el, i) => {
+  el.classList.add('rc'); el.style.transitionDelay = (i * .1) + 's';
+});
+document.querySelectorAll('.footer-row > div').forEach((el, i) => {
+  el.classList.add('rc'); el.style.transitionDelay = (i * .1) + 's';
+});
+
+// ── Intersection observer ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('vis');
+    e.target.querySelectorAll('.rc').forEach(c => c.classList.add('vis'));
+    io.unobserve(e.target);
+  });
+}, { threshold: .07, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Standalone rc
+const iorc = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); iorc.unobserve(e.target); }
+  });
+}, { threshold: .1 });
+document.querySelectorAll('.rc:not(.reveal .rc)').forEach(el => iorc.observe(el));
+
+// ── Nav ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const d = window.scrollY > 50;
+  nav.classList.toggle('down', d);
+  nav.classList.toggle('top', !d);
+}, { passive: true });
+
+// ── Hero parallax ──
+const heroBg = document.getElementById('hero-bg');
+window.addEventListener('scroll', () => {
+  if (heroBg && window.scrollY < window.innerHeight)
+    heroBg.style.transform = `translateY(${window.scrollY * .3}px)`;
+}, { passive: true });
+
+// ── Counter ──
+function animCount(el) {
+  if (el._done) return; el._done = true;
+  const tgt = parseFloat(el.dataset.target);
+  const dec = parseInt(el.dataset.dec || '0');
+  const t0  = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - t0) / 1500, 1);
+    const v = (1 - Math.pow(1 - p, 3)) * tgt;
+    el.textContent = dec ? v.toFixed(dec) : Math.round(v);
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = dec ? tgt.toFixed(dec) : tgt;
+  })(t0);
+}
+document.querySelectorAll('#hero .counter').forEach(animCount);
+</script>
+</body>
+</html>
